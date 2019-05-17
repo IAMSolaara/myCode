@@ -1,0 +1,7 @@
+cin >> dolphy;
+if ( dolphy == "Hitler" ) {
+		cout << "\nBrafen Racazzen\n";
+	}
+	else {
+		cout << "\nFICKEN COMMUNISTEN\n";
+	}

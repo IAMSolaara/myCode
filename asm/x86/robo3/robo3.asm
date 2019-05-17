@@ -1,0 +1,80 @@
+.model small
+.stack 100h
+.data
+N1   DB 0
+N2   DB 0
+RIS  DB 0
+RIS2 DB 0
+RIS3 DW 0
+MSG1 DB "Inserisci primo numero.$"
+MSG2 DB "Inserisci secondo numero.$"
+MSG3 DB "La somma e' $"
+MSG4 DB "La differenza e' $"
+MSG5 DB "Il prodotto e' $"
+
+LEGGI MACRO N
+  MOV AH,01h
+  INT 21h
+  SUB AL,48
+  MOV N,AL
+  ENDM
+STRING MACRO MSG
+  LEA DX,MSG
+  MOV AH,09h
+  INT 21h
+  ENDM
+SCRIVI MACRO CHR
+  MOV DL,CHR
+  ADD DL,48
+  MOV AH,02h
+  INT 21h
+  ENDM
+CAPO MACRO
+  MOV DL,13
+  MOV AH,02h
+  INT 21h
+  MOV DL,10
+  MOV AH,02h
+  INT 21h
+  ENDM
+SCRIVIW MACRO CHR
+  MOV DX,CHR
+  ADD DX,48
+  MOV AH,02h
+  INT 21h
+  ENDM
+.code
+INIZIO:
+  MOV AX,@DATA
+  MOV DS,AX
+  STRING MSG1
+  CAPO
+  LEGGI N1
+  CAPO
+  STRING MSG2
+  CAPO
+  LEGGI N2
+  CAPO
+  MOV AL,N1
+  ADD AL,N2
+  MOV RIS,AL
+  STRING MSG3
+  SCRIVI RIS
+  CAPO
+  ;MOV RIS,0
+  MOV AL,N1
+  SUB AL,N2
+  MOV RIS2,AL
+  STRING MSG4
+  SCRIVI RIS2
+  CAPO
+  MOV AL,N1
+  MOV BL,N2
+  MUL BL
+  MOV RIS3,AX
+  STRING MSG5
+  SCRIVIW RIS3
+  CAPO
+  MOV AH,4Ch
+  INT 21h
+  END INIZIO

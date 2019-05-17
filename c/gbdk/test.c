@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <gb/gb.h>
+#include <stdio.h>
 
 void endl(){puts("\n");}
 
