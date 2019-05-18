@@ -1,0 +1,157 @@
+
+{
+    "version":"3.7.1.v201901281154",
+    "created":"2019-02-19 11:45",
+    "nodestats":{
+        "nodes":[
+            {
+                "id":"org.knime.base.node.io.csvreader.CSVReaderNodeFactory#CSV Reader",
+                "nrexecs":9,
+                "nrfails":8,
+                "exectime":2067,
+                "nrcreated":3,
+                "successor":"org.knime.base.node.preproc.cellsplit2.CellSplitter2NodeFactory#Cell Splitter"
+            },
+            {
+                "id":"org.knime.base.node.preproc.filter.column.DataColumnSpecFilterNodeFactory#Column Filter",
+                "nrexecs":10,
+                "nrfails":0,
+                "exectime":84,
+                "nrcreated":4,
+                "successor":"org.knime.base.node.viz.plotter.scatter.ScatterPlotterNodeFactory#Scatter Plot"
+            },
+            {
+                "id":"org.knime.base.node.preproc.filter.row.RowFilterNodeFactory#Row Filter",
+                "nrexecs":3,
+                "nrfails":0,
+                "exectime":69,
+                "nrcreated":2,
+                "successor":"org.knime.base.node.viz.histogram.node.FixedColumnHistogramNodeFactory#Histogram"
+            },
+            {
+                "id":"org.knime.base.node.viz.histogram.node.FixedColumnHistogramNodeFactory#Histogram",
+                "nrexecs":9,
+                "nrfails":0,
+                "exectime":54,
+                "nrcreated":3,
+                "successor":"n/a"
+            },
+            {
+                "id":"org.knime.base.node.io.csvwriter.CSVWriterNodeFactory#CSV Writer",
+                "nrexecs":0,
+                "nrfails":0,
+                "exectime":0,
+                "nrcreated":1,
+                "successor":"n/a"
+            },
+            {
+                "id":"org.knime.base.node.io.table.write.WriteTableNodeFactory#Table Writer",
+                "nrexecs":0,
+                "nrfails":0,
+                "exectime":0,
+                "nrcreated":1,
+                "successor":"n/a"
+            },
+            {
+                "id":"org.knime.base.node.viz.table.TableNodeFactory#Interactive Table",
+                "nrexecs":4,
+                "nrfails":0,
+                "exectime":7,
+                "nrcreated":1,
+                "successor":"n/a"
+            },
+            {
+                "id":"org.knime.base.node.preproc.filter.definition.apply.FilterApplyNodeFactory#Filter Apply",
+                "nrexecs":0,
+                "nrfails":0,
+                "exectime":0,
+                "nrcreated":1,
+                "successor":"n/a"
+            },
+            {
+                "id":"org.knime.base.node.preproc.cellsplit2.CellSplitter2NodeFactory#Cell Splitter",
+                "nrexecs":10,
+                "nrfails":0,
+                "exectime":76,
+                "nrcreated":2,
+                "successor":"org.knime.base.node.preproc.rename.RenameNodeFactory#Column Rename"
+            },
+            {
+                "id":"org.knime.base.node.preproc.rename.RenameNodeFactory#Column Rename",
+                "nrexecs":3,
+                "nrfails":0,
+                "exectime":4,
+                "nrcreated":3,
+                "successor":"org.knime.ext.jep.JEPNodeFactory#Math Formula"
+            },
+            {
+                "id":"org.knime.base.node.preproc.groupby.GroupByNodeFactory#GroupBy",
+                "nrexecs":8,
+                "nrfails":0,
+                "exectime":53,
+                "nrcreated":2,
+                "successor":"org.knime.json.node.fromstring.StringToJSONNodeFactory#String to JSON"
+            },
+            {
+                "id":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer",
+                "nrexecs":3,
+                "nrfails":3,
+                "exectime":19,
+                "nrcreated":1,
+                "successor":"n/a"
+            },
+            {
+                "id":"org.knime.json.node.fromstring.StringToJSONNodeFactory#String to JSON",
+                "nrexecs":0,
+                "nrfails":1,
+                "exectime":49,
+                "nrcreated":1,
+                "successor":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer"
+            },
+            {
+                "id":"org.knime.json.node.fromtable.TableToJsonNodeFactory#Table to JSON",
+                "nrexecs":3,
+                "nrfails":0,
+                "exectime":33,
+                "nrcreated":2,
+                "successor":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer"
+            },
+            {
+                "id":"org.knime.base.node.viz.plotter.box.BoxPlotNodeFactory#Box Plot",
+                "nrexecs":0,
+                "nrfails":0,
+                "exectime":0,
+                "nrcreated":1,
+                "successor":"n/a"
+            },
+            {
+                "id":"org.knime.base.node.viz.plotter.scatter.ScatterPlotterNodeFactory#Scatter Plot",
+                "nrexecs":1,
+                "nrfails":0,
+                "exectime":4,
+                "nrcreated":1,
+                "successor":"n/a"
+            },
+            {
+                "id":"org.knime.ext.jep.JEPNodeFactory#Math Formula",
+                "nrexecs":0,
+                "nrfails":0,
+                "exectime":0,
+                "nrcreated":1,
+                "successor":"org.knime.base.node.preproc.groupby.GroupByNodeFactory#GroupBy"
+            }
+        ],
+        "metaNodes":{
+        },
+        "wrappedNodes":{
+        }
+    },
+    "uptime":2729756,
+    "workflowsOpened":0,
+    "remoteWorkflowsOpened":0,
+    "launches":5,
+    "lastApplicationID":"org.knime.product.KNIME_APPLICATION",
+    "timeSinceLastStart":829086,
+    "crashes":2,
+    "properlyShutDown":true
+}

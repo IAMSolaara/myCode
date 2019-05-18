@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Graphicy</title>
+		<script type="text/javascript" src="https://www.gstatics.com/charts/loader.js"></script>
+	</head>
+	<body>
+		<div id="dia1"></div>
+		<div id="mappa"></div>
+		<script>
+			google.charts.load("current {'packages':['corechart','map']}");
+			google.charts.setOnLoadCallBack(disegna);
+			function mappa(){
+				var datiGeo, optionGeo, mappa;
+				datiGeo= new google.visualization.DataTable();
+				datiGeo.addColumn("number","Long");
+				datiGeo.addColumn("number","Lat");
+				datiGeo.addColumn("string","Sito");
+				
+				
+			}
+
+			function disegna(){
+				var datiDia1, optionDia1, dia1;
+				datiDia1 = new google.visualization.arrayToDataTable([["Genere","Numero"],["Maschi",43],["Femmine",57]]);
+				optionDia1 = {title:"Censimento", is3D:true, slices:{1:{offset:0.3}}};
+				dia1= new google.visualizationPieChart(document.getElementById('dia1'));
+				
+				
+			};
+		</script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+---DOMANDE---
+
+1)    creare nella vostra home directory le cartelle public_html, writer, calc, scratch, python
+2)    copiare i file fstab e resolv.conf dalla directory /etc/ alla vostra home
+3)    visualizzare in ordine di tempo i file presenti in /usr/local/
+4)    visualizzare i file, il cui nome inizia con la lettera c e finisce con la lettera n, che si trovano nella directory /usr/bin
+5)    rimanendo nella vostra home, creare nella directory calc una directory prove
+6)    copiare nella directory prove tutti i file il cui nome contiene la lettera z e che si trovano nella directory /etc
+7)    rimanendo nella vostra home, rimuovere dalla directory prove tutti i file il cui nome inizia con la lettera z
+8)    copiare nella directory prove la directory public_html che si trova nella directory /home2/quintac/
+9)    rinominare la directory public_html che si trova nella directory prove con il nuovo nome: prove1
+10)   rimuovere la directory prove1 che si trova nella directory prove
+11)   rimuovere la directory prove
+
+---RISPOSTE---
+
+1)  mkdir ~/public_html ~/writer ~/calc ~/scratch ~/python
+2)  cp /etc/fstab /etc/resolv.conf ~
+3)  ls -lrt /usr/local
+4)  ls /usr/bin/c*n
+5)  mkdir ~/calc/prove
+6)  cp /etc/*z* prove
+7)  rm ./prove/z*
+8)  cp -r /home2/quintac/public_html ./prove/
+9)  mv ./prove/public_html ./prove/prove1
+10) rm -r ./prove/prove1
+11) rm -r prove

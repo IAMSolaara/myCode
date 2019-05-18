@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>son la mappa</title>
+		<script type="text/javascript" src="https://www.gstatics.com/charts/loader.js"></script>
+	</head>
+	<body>
+		<div id="mappa"></div>
+		<script>
+			google.charts.load('current', {'packages':['map']});
+			google.charts.setOnLoadCallBack(mappa);
+			function mappa(){
+
+				var datiGeo, optionGeo, mappa;
+
+				datiGeo= new google.visualization.DataTable();
+
+				datiGeo.addColumn('number','Lat');
+				datiGeo.addColumn('number','Long');
+				datiGeo.addColumn('string','Quartiere');
+				datiGeo.addRows([[39.228472,9.101443,'Tuvixeddu']]);
+
+				mappa= new google.visualization.Map(document.GetElementById('mappa'));
+
+                                optionGeo={
+                                        showTooltip: true,
+                                        showInfoWindow: true,
+                                        mapType: 'satellite'
+                                };
+
+				
+				mappa.draw(datiGeo,optionGeo);
+				
+				
+			}
+		</script>
+	</body>
+</html>

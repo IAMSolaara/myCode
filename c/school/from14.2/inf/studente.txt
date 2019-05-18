@@ -1,0 +1,26 @@
+Lorenzo
+Cauli
+14 9 2002
+3
+8
+Telecomunicazioni
+15 4 2019
+5
+Matematica
+5 3 2019
+3
+Disegno
+8 2 2019
+Flavia
+Finamore
+24 8 1972
+2
+2
+Telecomunicazioni
+15 4 1988
+5
+Matematica
+5 3 1988
+3
+Disegno
+8 2 1988

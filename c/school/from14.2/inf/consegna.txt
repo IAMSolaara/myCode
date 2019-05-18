@@ -1,0 +1,4 @@
+Il reparto di Medicina Interna dell'Ospedale "Brotzu" decide di monitorare i dati dell'emoglobina dei pazienti del Day Hospital nel mese di aprile. I pazienti possono 
+essere al massimo 30. Ogni paziente è identificato dal codice sanitario (codice alfanumerico di 5 caratteri) e può essere presente in reparto in giorni non consecutivi; per 
+ogni giorno di ricovero in reparto sono riportati 5 valori (interi positivi) dell'emoglobina. Alla fine del mese il dirigente del reparto intende sapere, per ogni paziente, 
+in quali giorni di ricovero il valore minimo dell'emoglobina è stato minore di un valore di riferimento, uguale per tutti i pazienti, chiesto all'esterno.
