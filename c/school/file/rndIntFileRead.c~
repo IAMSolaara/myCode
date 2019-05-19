@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+FILE* fileOpen(const char fname[], const char perm[]);
+void fileCmp(FILE* f, FILE* f1);
+
+int main(){
+  FILE* f, f1;
+  f=fileOpen("cmp1.dat", "r");
+  f1=fileOpen("cmp2.dat", "r");
+  fileCmp(f, f1);
+  fclose(f);
+  fclose(f1);
+  return 0;
+}
+
+FILE* fileOpen(const char fname[], const char perm[]){
+  FILE* out;
+  out = fopen(fname, perm);
+  if (out == NULL) {
+    printf("Errore apertura file.\n");
+    exit(-1);
+  }
+  return out;
+}
+
+void fileCmp(FILE* f, FILE* f1){
+  int tmp, tmp1;
+  while(fread(&tmp, sizeof(int), 1, f) && fread(&tmp1, sizeof(int), 1, f1) && ){
+    printf("%d ", tmp);
+  }
+  printf("\n");
+}
+
