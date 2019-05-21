@@ -27,7 +27,7 @@ int main(){
       case(3): y -= 1; break;
       case(4): x += 1; y += 1; break;
       case(5): x -= 1; y += 1; break;
-      case(6): y += 1; x -= 1; break;
+      case(6): y -= 1; x += 1; break;
       case(7): y -= 1; x -= 1; break;
     }
     if (y < 0 || y > LINES) y = rnd(0, LINES);
@@ -36,7 +36,6 @@ int main(){
     if (mvinch(y,x) == pal[0]) ch = pal[1];
     else if (mvinch(y,x) == pal[1]) ch = pal[2];
     else if (mvinch(y,x) == pal[2]) ch = pal[3];
-    //    else if (mvinch(y,x) == pal[3]) ch = pal[0];
     mvaddch(y, x, ch);
     ch = '#';
     refresh();
