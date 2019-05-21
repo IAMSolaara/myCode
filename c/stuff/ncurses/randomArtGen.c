@@ -5,7 +5,7 @@
 int rnd(int min, int max);
 
 int main(){
-  char pal[]={'#', '%', '<', '~'};
+  char pal[]={';', '%', 'F', '['};
   int runs;
   int dir;
   char ch='#';
@@ -36,8 +36,9 @@ int main(){
     if (mvinch(y,x) == pal[0]) ch = pal[1];
     else if (mvinch(y,x) == pal[1]) ch = pal[2];
     else if (mvinch(y,x) == pal[2]) ch = pal[3];
+    else if (mvinch(y,x) == pal[3]) ch = pal[3];
     mvaddch(y, x, ch);
-    ch = '#';
+    ch = pal[0];
     refresh();
     nanosleep(&wtime, NULL);
   }
