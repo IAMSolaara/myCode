@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <162lib.h>
+
+int main(){
+  FILE* f;
+  f = fileOpen(__FILE__, "r");
+
+
+
+  return 0;
+}
