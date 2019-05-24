@@ -44,14 +44,18 @@ START:
 	LEGGI H		;lettura altezza
 	CAPO
 	MOV CX,0	;zerofill CX
-	MOV CL,H	;spostamento di H in CL
-HEIGHT:	PUSH CX		;loop altezza e push di cx per preservare il loop
-	MOV CL,L	;spostamento di L in CL
-DRAW:	STRING HASH	;scrittura cancelletto
-	LOOP DRAW	;loop larghezza fine
-	POP CX		;riporto loop altezza alla fine di loop larghezza
-	CAPO		;ritorno a capo
-	LOOP HEIGHT	;loop altezza fine
+	CALL quadro
 	MOV AH,4Ch
 	INT 21h
+	quadro PROC NEAR
+		MOV CL,H	;spostamento di H in CL
+HEIGHT:		PUSH CX		;loop altezza e push di cx per preservare il loop
+		MOV CL,L	;spostamento di L in CL
+DRAW:		STRING HASH	;scrittura cancelletto
+		LOOP DRAW	;loop larghezza fine
+		POP CX		;riporto loop altezza alla fine di loop larghezza
+		CAPO		;ritorno a capo
+		LOOP HEIGHT	;loop altezza fine
+		RET
+		quadro ENDP
 	END START

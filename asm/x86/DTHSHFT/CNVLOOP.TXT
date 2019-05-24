@@ -1,0 +1,10 @@
+;conversione dec to hex	
+	mov ah, base
+	mov al, 1
+	mov cx,4
+LLoop:	shr n,1
+	jc tru
+	jmp fini
+tru:	mul ah
+    	add lh, al
+fini:	loop Lloop

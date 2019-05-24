@@ -7,41 +7,20 @@ HMSG	DB	"Inserire altezza.$"
 HASH	DB	"#$"
 l	DB	12
 h	DB	6
-LEGGI MACRO N
-	MOV AH,01h
-	INT 21h
-	SUB AL,48
-	MUL TEN
-	MOV N,AL
-	MOV AH,01h
-	INT 21h
-	SUB AL,48
-	ADD N,AL	
-	ENDM
-CAPO MACRO
-	MOV DL,13
-	MOV AH,02h
-	INT 21h
-	MOV DL,10
-	MOV AH,02h
-	INT 21h
-	ENDM
-STRING MACRO MSG
-	LEA DX,MSG
-	MOV AH,09h
-	INT 21h
-	ENDM
+
+include ..\macro.txt
+
 .code
 START:
 	MOV AX,@DATA
 	MOV DS,AX
 	STRING LMSG
 	CAPO
-	LEGGI L		;lettura larghezza
+	LEGGI2C L		;lettura larghezza
 	CAPO
 	STRING HMSG
 	CAPO
-	LEGGI H		;lettura altezza
+	LEGGI2C H		;lettura altezza
 	CAPO
 	MOV CX,0	;zerofill CX
 	MOV CL,H	;spostamento di H in CL
