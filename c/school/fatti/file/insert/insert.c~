@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <162lib.h>
+
+int main(){
+  FILE* f;
+  f = fileOpen(in.dat, "r");
+  
+  
+  
+  return 0;
+}
