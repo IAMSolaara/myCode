@@ -1,4 +1,0 @@
-/home/alunno/ODD/piano_scavi_siti.csv
-/home/alunno/ODD/Incidenti_primo_trimestre_2015.csv
-/home/alunno/ODD/ComuneCagliari_Stradario_4dic2015.csv
-/home/alunno/ODD/vieInput.csv
