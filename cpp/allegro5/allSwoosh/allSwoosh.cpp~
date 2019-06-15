@@ -1,0 +1,12 @@
+#include <allegro.h>
+
+int main(){
+  allegro_init();
+  BITMAP* win = 
+
+
+
+
+
+  return 0;
+}

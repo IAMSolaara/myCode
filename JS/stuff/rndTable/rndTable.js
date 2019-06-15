@@ -1,4 +1,4 @@
-var str;
+var str = 1;
 var el="t";
 var i=0;
 var j=0;
@@ -8,11 +8,9 @@ while (str < 2000) {
     i =  rnd(1,3);
 
     el = "t" + j + i;
-    document.getElementById(el).innerHTML = (2);
-    str++; 
-    
-    
-    
+    document.getElementById(el).innerHTML = (rnd(0,14));
+    str++;
+    console.log("cycle.");
 }
 
 function rnd(min, max) {
