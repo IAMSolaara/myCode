@@ -1,6 +1,7 @@
 <html>
   <title>jQuery tests</title>
   <script src="/jquery/jquery-3.4.1.min.js"></script>
+  <script src="/jquery/jquery.color.plus-names-2.1.2.min.js">
   <script src="./jqtests.js"> </script>
   <body>
     <div>
