@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 public class main {
     
     public static void main(String[] args) {
-	ImageIcon good = new ImageIcon("/home/pi/codeFromMyPi/Java/stuff/firsties/guiTst/good.png");
-	ImageIcon bad = new ImageIcon("/home/pi/codeFromMyPi/Java/stuff/firsties/guiTst/bad.png");
+	ImageIcon good = new ImageIcon("./good.png");
+	ImageIcon bad = new ImageIcon("./bad.png");
 	
 	JFrame frame = new JFrame("162test");                             //string arg to JFrame is win title --162
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);             //set close behaviour --162
