@@ -1,0 +1,31 @@
+<html>
+  <title>jQuery tests</title>
+  <script src="/jquery/jquery-3.4.1.min.js"></script>
+  <script src="/jquery/jquery.color.plus-names-2.1.2.min.js">
+  <script src="./jqtests.js"> </script>
+  <body>
+    <div>
+      <h id="text">These are some jQuery tests I will update along learning the library!</h></br>
+      <button id="butt1">TEST</button>
+      <button id="butt2">TEST2</button>
+      <p>TEST1 will make the text fade out, while TEST2 will make it fade back in! Feel free to do something about it!</p>
+      <p id="swoosh"></p>
+    </div>
+    <div class="bowie">
+      <button id="bowiebutt">You shouldn't click this you know...</button>
+      <p class="bowie2">TEST</p>
+      <button id="flipper">FLIP STATE</button>
+    </div>
+  </body>
+  <style>
+    div.bowie {
+	width: 100%
+    }
+    .bowie2 {
+	position: relative;
+	left: 100%;
+    }
+
+
+  </style>
+</html>
