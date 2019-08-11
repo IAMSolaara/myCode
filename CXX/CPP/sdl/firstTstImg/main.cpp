@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_image.h>
 #include <stdio.h>
 #include <iostream>
 
@@ -7,40 +8,43 @@ using namespace std;
 #define SCRWIDTH  640
 #define SCRHEIGHT 480
 
-bool init(SDL_Window* win, SDL_Renderer* render, SDL_Event* event);
+bool SDLPrginit(SDL_Window* win, SDL_Renderer* render, SDL_Event event);
 
 bool loadMedia(SDL_Window *win, SDL_Renderer *render, SDL_Texture *img, string imgpath);
 
-void close(SDL_Window* win, SDL_Renderer* render, SDL_Texture* img);
+void SDLPrgclose(SDL_Window* win, SDL_Renderer* render, SDL_Texture* img);
 
 
 int main(int argc, char* args[]){
   SDL_Window* window;          //declare window
-  //  SDL_Surface* surface;        //declare screen surface
-  //  SDL_Surface* imgSurface;     //declare image surface where the img will be loaded
   SDL_Renderer* render;        //declare renderer
   SDL_Texture* img;            //declare img texture
   SDL_Event event = {0};       //declare events
+  SDL_Rect texture;            //declare texture rectangle
+
   
-  if (!init(window, render, &event)){
-    printf("Failed to init SDL.\n");
+  if (!SDLPrginit(window, render, event)){
+    printf("\nFailed to init SDL.\n");
   }
   else {
-    if (!loadMedia(window, render, img, "images/test.bmp")) {
-      printf("Failed to load media.\n");
+    if (!loadMedia(window, render, img, "images/test.png")) {
+      printf("\nFailed to load media.\n");
     }
     else {
-      
+      SDL_QueryTexture(img, NULL, NULL, &texture.w, &texture.h);
+      SDL_RenderClear(render);
+      SDL_RenderCopy(render, img, NULL, &texture);
+      SDL_RenderPresent(render);
       SDL_Delay(10000);
     }
   }
-  close(window, render, img);
+  SDLPrgclose(window, render, img);
   return 0;
 }
 
-bool init(SDL_Window* win, SDL_Renderer* render, SDL_Event* event){
+bool SDLPrginit(SDL_Window* win, SDL_Renderer* render, SDL_Event event){
   bool state = true;
-  
+
   if (SDL_Init( SDL_INIT_EVERYTHING ) < 0) {
     printf("SDL init error %s\n", SDL_GetError());
     state = false;
@@ -66,11 +70,16 @@ bool init(SDL_Window* win, SDL_Renderer* render, SDL_Event* event){
 bool loadMedia(SDL_Window *win, SDL_Renderer *render, SDL_Texture *img, string imgpath){
   bool state = true;
 
-
+  const char* path = imgpath.c_str();
+  img = IMG_LoadTexture(render, path);
+  if (img == NULL) {
+    cout << "Couldn't load texture. Error " << SDL_GetError();
+    state = false;
+  }
   return state;
 }
 
-void close(SDL_Window* win, SDL_Renderer* render, SDL_Texture* img) {
+void SDLPrgclose(SDL_Window* win, SDL_Renderer* render, SDL_Texture* img) {
   SDL_DestroyTexture(img);
   SDL_DestroyRenderer(render);
   SDL_DestroyWindow(win);
