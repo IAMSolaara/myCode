@@ -8,26 +8,34 @@ bool init(SDL_Window* win, SDL_Surface* surface);
 
 bool loadMedia(SDL_Window* win, SDL_Surface* surface, SDL_Surface* imgSurface);
 
-void close();
+void close(SDL_Window* win, SDL_Surface* imgSurface);
 
 int main(int argc, char* args[]){
   SDL_Window* window;          //declare window
   SDL_Surface* surface;        //declare screen surface
   SDL_Surface* imgSurface;     //declare image surface where the img will be loaded
   
-  init(window, surface);
-  loadMedia(window, surface, imgSurface);
-
-  
-  SDL_DestroyWindow(window);
-  SDL_Quit();
+  if (!init(window, surface)){
+    printf("Failed to init SDL.\n");
+  }
+  else {
+    if (!loadMedia(window, surface, imgSurface)) {
+      printf("Failed to load media.\n");
+    }
+    else {
+      SDL_BlitSurface(imgSurface, NULL, surface, NULL);
+      SDL_UpdateWindowSurface(window);
+      SDL_Delay(2000);
+    }
+  }
+  close(window, imgSurface);
   return 0;
 }
 
 bool init(SDL_Window* win, SDL_Surface* surface){
   bool state = true;
   
-  if (SDL_Init( SDL_INIT_VIDEO ) < 0) {
+  if (SDL_Init( SDL_INIT_EVERYTHING ) < 0) {
     printf("SDL init error %s\n", SDL_GetError());
     state = false;
   }
@@ -39,9 +47,6 @@ bool init(SDL_Window* win, SDL_Surface* surface){
     }
     else {
       surface = SDL_GetWindowSurface(win);
-      SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF));     //fill surface with white color
-      SDL_UpdateWindowSurface(win);
-      SDL_Delay(10000);
     }
   }
   return state;
@@ -57,4 +62,10 @@ bool loadMedia(SDL_Window* win, SDL_Surface* surface, SDL_Surface* imgSurface){
     state = false;
   }
   return state;
+}
+
+void close(SDL_Window* win, SDL_Surface* imgSurface) {
+  SDL_FreeSurface(imgSurface);
+  SDL_DestroyWindow(win);
+  SDL_Quit();
 }
