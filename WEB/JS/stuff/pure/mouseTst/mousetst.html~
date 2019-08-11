@@ -1,8 +1,0 @@
-<html>
-  <body>
-    <button onclick="mouseyFunction()">Click me</button>
-    <div id="test"></div>
-    <script src="mouseTst.js"></script>
-  </body>
-</html>
-
