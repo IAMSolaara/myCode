@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.8.11)  11 AUG 2019 13:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.8.11)  11 AUG 2019 14:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -51,6 +51,10 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
+
+LaTeX Warning: Unused global option(s):
+    [8pt].
+
 (./firstTst.aux)
 \openout1 = `firstTst.aux'.
 
@@ -140,30 +144,26 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 <images/cat.png, id=1, 708.6475pt x 399.4925pt>
 File: images/cat.png Graphic file (type png)
 <use images/cat.png>
-Package pdftex.def Info: images/cat.png  used on input line 18.
-(pdftex.def)             Requested size: 708.64578pt x 399.49152pt.
-
-Overfull \hbox (378.64578pt too wide) in paragraph at lines 18--20
-[][]
- []
+Package pdftex.def Info: images/cat.png  used on input line 19.
+(pdftex.def)             Requested size: 172.5pt x 97.2456pt.
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/cat.png>]
 (./firstTst.aux) ) 
 Here is how much of TeX's memory you used:
- 1453 strings out of 494561
- 21048 string characters out of 6177454
- 77639 words of memory out of 5000000
- 5119 multiletter control sequences out of 15000+600000
+ 1455 strings out of 494561
+ 21065 string characters out of 6177454
+ 77648 words of memory out of 5000000
+ 5121 multiletter control sequences out of 15000+600000
  7021 words of font info for 25 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,6n,25p,324b,189s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,6n,25p,324b,226s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on firstTst.pdf (1 page, 128937 bytes).
+Output written on firstTst.pdf (1 page, 130152 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream
