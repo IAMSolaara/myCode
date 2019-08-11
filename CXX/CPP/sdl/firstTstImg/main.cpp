@@ -1,38 +1,44 @@
 #include <SDL.h>
 #include <stdio.h>
+#include <iostream>
+
+using namespace std;
 
 #define SCRWIDTH  640
 #define SCRHEIGHT 480
 
-bool init(SDL_Window* win, SDL_Surface* surface);
+bool init(SDL_Window* win, SDL_Renderer* render, SDL_Event* event);
 
-bool loadMedia(SDL_Window* win, SDL_Surface* surface, SDL_Surface* imgSurface);
+bool loadMedia(SDL_Window *win, SDL_Renderer *render, SDL_Texture *img, string imgpath);
 
-void close(SDL_Window* win, SDL_Surface* imgSurface);
+void close(SDL_Window* win, SDL_Renderer* render, SDL_Texture* img);
+
 
 int main(int argc, char* args[]){
   SDL_Window* window;          //declare window
-  SDL_Surface* surface;        //declare screen surface
-  SDL_Surface* imgSurface;     //declare image surface where the img will be loaded
+  //  SDL_Surface* surface;        //declare screen surface
+  //  SDL_Surface* imgSurface;     //declare image surface where the img will be loaded
+  SDL_Renderer* render;        //declare renderer
+  SDL_Texture* img;            //declare img texture
+  SDL_Event event = {0};       //declare events
   
-  if (!init(window, surface)){
+  if (!init(window, render, &event)){
     printf("Failed to init SDL.\n");
   }
   else {
-    if (!loadMedia(window, surface, imgSurface)) {
+    if (!loadMedia(window, render, img, "images/test.bmp")) {
       printf("Failed to load media.\n");
     }
     else {
-      SDL_BlitSurface(imgSurface, NULL, surface, NULL);
-      SDL_UpdateWindowSurface(window);
-      SDL_Delay(2000);
+      
+      SDL_Delay(10000);
     }
   }
-  close(window, imgSurface);
+  close(window, render, img);
   return 0;
 }
 
-bool init(SDL_Window* win, SDL_Surface* surface){
+bool init(SDL_Window* win, SDL_Renderer* render, SDL_Event* event){
   bool state = true;
   
   if (SDL_Init( SDL_INIT_EVERYTHING ) < 0) {
@@ -42,30 +48,31 @@ bool init(SDL_Window* win, SDL_Surface* surface){
   else {
     win = SDL_CreateWindow("firstTst", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRWIDTH, SCRHEIGHT, SDL_WINDOW_SHOWN);
     if (win == NULL) {
-      printf("couldn't create window. error %s", SDL_GetError());
+      printf("couldn't create window. error %s\n", SDL_GetError());
       state = false;
     }
     else {
-      surface = SDL_GetWindowSurface(win);
+      render = SDL_CreateRenderer(win, -1, 0);
+      if (render == NULL) {
+	printf("Couldn't create renderer. Error %s\n", SDL_GetError());
+	state = false;
+      }
     }
   }
   return state;
 }
 
 
-bool loadMedia(SDL_Window* win, SDL_Surface* surface, SDL_Surface* imgSurface){
+bool loadMedia(SDL_Window *win, SDL_Renderer *render, SDL_Texture *img, string imgpath){
   bool state = true;
-  char imgPath[] = "images/test.bmp";
-  imgSurface = SDL_LoadBMP(imgPath);
-  if (imgSurface == NULL) {
-    printf("Couldn't load image %s. SDL Error %s\n", imgPath, SDL_GetError());
-    state = false;
-  }
+
+
   return state;
 }
 
-void close(SDL_Window* win, SDL_Surface* imgSurface) {
-  SDL_FreeSurface(imgSurface);
+void close(SDL_Window* win, SDL_Renderer* render, SDL_Texture* img) {
+  SDL_DestroyTexture(img);
+  SDL_DestroyRenderer(render);
   SDL_DestroyWindow(win);
   SDL_Quit();
 }
