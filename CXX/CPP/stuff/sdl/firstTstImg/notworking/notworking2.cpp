@@ -16,19 +16,19 @@ void SDLPrgclose(SDL_Window* win, SDL_Renderer* render, SDL_Texture* img);
 
 
 int main(int argc, char* args[]){
-  SDL_Window* window;          //declare window
-  SDL_Renderer* render;        //declare renderer
-  SDL_Texture* img;            //declare img texture
+  SDL_Window* window = NULL;          //declare window
+  SDL_Renderer* render = NULL;        //declare renderer
+  SDL_Texture* img = NULL;            //declare img texture
   SDL_Event event = {0};       //declare events
   SDL_Rect texture;            //declare texture rectangle
 
   
   if (!SDLPrginit(window, render, event)){
-    printf("\nFailed to init SDL.\n");
+    cout << "\nFailed to init SDL.\n";
   }
   else {
-    if (!loadMedia(window, render, img, "images/test.png")) {
-      printf("\nFailed to load media.\n");
+    if (!loadMedia(window, render, img, "test.png")) {
+      cout << "\nFailed to load media.\n";
     }
     else {
       SDL_QueryTexture(img, NULL, NULL, &texture.w, &texture.h);
@@ -46,19 +46,19 @@ bool SDLPrginit(SDL_Window* win, SDL_Renderer* render, SDL_Event event){
   bool state = true;
 
   if (SDL_Init( SDL_INIT_EVERYTHING ) < 0) {
-    printf("SDL init error %s\n", SDL_GetError());
+    cout << "SDL init error \n" << SDL_GetError();
     state = false;
   }
   else {
     win = SDL_CreateWindow("firstTst", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRWIDTH, SCRHEIGHT, SDL_WINDOW_SHOWN);
     if (win == NULL) {
-      printf("couldn't create window. error %s\n", SDL_GetError());
+      cout << "couldn't create window. error \n" << SDL_GetError();
       state = false;
     }
     else {
       render = SDL_CreateRenderer(win, -1, 0);
       if (render == NULL) {
-	printf("Couldn't create renderer. Error %s\n", SDL_GetError());
+	cout << "Couldn't create renderer. Error \n" << SDL_GetError();
 	state = false;
       }
     }
