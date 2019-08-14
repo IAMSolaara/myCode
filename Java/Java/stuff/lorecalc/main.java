@@ -12,6 +12,7 @@ public class main {
 	calcolatrice.setY(stdin.nextDouble());
 	System.out.println("Specify operation.");
 	calcolatrice.setOp(stdin.next());
+	calcolatrice.calcRun();
 	System.out.println(calcolatrice.getResult());
 
 	
