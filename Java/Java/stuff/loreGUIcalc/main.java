@@ -37,10 +37,11 @@ public class main {
 		    System.out.println(Double.valueOf(fact2.getText()));
 		    System.out.println((String)opSel.getSelectedItem());
 		    System.out.println(calcolatrice.getResult());
+		    System.out.println();
 		    System.out.println(calcolatrice.getX());
 		    System.out.println(calcolatrice.getY());
-		    System.out.println();
-		    System.out.println();
+		    System.out.println(calcolatrice.getOp());
+		    System.out.println(calcolatrice.getResult());
 		    System.out.println();
 		}
 	    });
