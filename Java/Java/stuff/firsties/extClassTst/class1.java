@@ -8,3 +8,4 @@ public class class1 {
 	this.y = arg2;
     }
 }
+
