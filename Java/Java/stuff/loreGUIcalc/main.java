@@ -29,10 +29,12 @@ public class main {
 	goButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    calcolatrice.setX(Double.valueOf(fact1.getText()));
-		    calcolatrice.setY(Double.valueOf(fact1.getText()));
+		    calcolatrice.setY(Double.valueOf(fact2.getText()));
 		    calcolatrice.setOp((String)opSel.getSelectedItem());
 		    calcolatrice.calcRun();
 		    resLabel.setText(Double.toString(calcolatrice.getResult()));
+		    //next are for debugging
+		    /*
 		    System.out.println(Double.valueOf(fact1.getText()));
 		    System.out.println(Double.valueOf(fact2.getText()));
 		    System.out.println((String)opSel.getSelectedItem());
@@ -43,6 +45,7 @@ public class main {
 		    System.out.println(calcolatrice.getOp());
 		    System.out.println(calcolatrice.getResult());
 		    System.out.println();
+		    */
 		}
 	    });
 	panelS.add(fact1);

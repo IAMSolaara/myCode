@@ -18,14 +18,14 @@ public class Calc {
     public void setOp(String in) {
 	this.op = in;
     }
-    public void getX(double in) {
-	return x;
+    public double getX() {
+	return this.x;
     }
-    public void getY(double in) {
-	return y;
+    public double getY() {
+	return this.y;
     }
-    public void getOp(String in) {
-	return op;
+    public String getOp() {
+	return this.op;
     }
     
     public void calcRun() {
