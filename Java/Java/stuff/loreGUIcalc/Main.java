@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class main {
+public class Main {
     public static void main(String args[]) {
 	String op[] = {"+", "-", "*", "/"};
 	Scanner stdin = new Scanner(System.in);
@@ -57,18 +57,5 @@ public class main {
 	mainWin.getContentPane().add(BorderLayout.SOUTH, panelS);
 
 	mainWin.setVisible(true);
-	
-	/*
-	System.out.println("Specify first operand.");
-	calcolatrice.setX(stdin.nextDouble());
-	System.out.println("Specify second operand.");
-	calcolatrice.setY(stdin.nextDouble());
-	System.out.println("Specify operation.");
-	calcolatrice.setOp(stdin.next());
-	calcolatrice.calcRun();
-	System.out.println(calcolatrice.getResult());
-	*/
-	
-	
     }
 }
