@@ -1,6 +1,5 @@
 #include <ncurses.h>
-
-int rnd(min,max);
+#include <162lib.h>
 
 int main() {
   int st=1;
@@ -33,6 +32,3 @@ int main() {
   endwin();
   return 0;
 }
-
-int rnd(min, max) {
-  
