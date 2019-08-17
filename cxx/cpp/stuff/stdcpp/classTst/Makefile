@@ -1,0 +1,2 @@
+default:	*.cpp
+	g++ *.cpp
