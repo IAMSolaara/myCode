@@ -1,5 +1,6 @@
 a.out
-/CXX/Arduino/libraries/*
-
 /Java/Java/**/a.jar
 /Java/Java/**/out/
+*.swp
+/CXX/Arduino/libraries/*
+
