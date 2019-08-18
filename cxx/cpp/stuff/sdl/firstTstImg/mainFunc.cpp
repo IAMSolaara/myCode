@@ -8,16 +8,26 @@ using namespace std;
 #define SCRWIDTH  640
 #define SCRHEIGHT 480
 
+void SDLInit(SDL_Window* win, SDL_Renderer* renderer);
 SDL_Rect SDLBoxPut(int width, int height, int x, int y);
-
+void SDLPrimaryLoop(SDL_Window* win, SDL_Renderer* renderer, SDL_Event events);
 
 int main(){
   SDL_Window* win = NULL;
   SDL_Renderer* renderer = NULL;
   SDL_Event events;
-
-  //init()
   
+  SDLInit(win, renderer);               //init window with accelerated VSynced renderer
+
+  SDLPrimaryLoop(win, renderer, events);
+
+  if (renderer) SDL_DestroyRenderer(renderer);
+  if (win) SDL_DestroyWindow(win);
+  SDL_Quit();
+  return 0;
+}
+
+void SDLInit(SDL_Window* win, SDL_Renderer* renderer) {
   std::stringstream error;
   try{
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0){                                                                                                              //SDL library functions init.
@@ -38,9 +48,18 @@ int main(){
   catch (string error_str) {
     cout << error_str << "\n";
   }
+} 
 
-  //mainloop()
-  
+SDL_Rect SDLBoxPut(int width, int height, int x, int y){
+  SDL_Rect out;
+  out.w = width;
+  out.h = height;
+  out.x = x;
+  out.y = y;
+  return out;
+}
+
+void SDLPrimaryLoop(SDL_Window* win, SDL_Renderer* renderer, SDL_Event events){
   SDL_Rect box = SDLBoxPut(100, 100, SCRWIDTH/8, SCRHEIGHT/8);
   bool mainLoop = true;
 
@@ -61,10 +80,9 @@ int main(){
 
     const Uint8 *state = SDL_GetKeyboardState(NULL);
     if (state[SDL_SCANCODE_LEFT]) if (box.x > 0) box.x -= (int)(speed * deltaTime);
-    if (state[SDL_SCANCODE_RIGHT]) if (box.x < SCRWIDTH - box.w) box.x += (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_RIGHT]) if (box.x < SCRWIDTH) box.x += (int)(speed * deltaTime);
     if (state[SDL_SCANCODE_UP]) if (box.y > 0) box.y -= (int)(speed * deltaTime);
-    if (state[SDL_SCANCODE_DOWN]) if (box.y < SCRWIDTH - box.h) box.y += (int)(speed * deltaTime);
-
+    if (state[SDL_SCANCODE_DOWN]) if (box.y < SCRWIDTH) box.y += (int)(speed * deltaTime);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
@@ -75,19 +93,4 @@ int main(){
 
     SDL_Delay(1);
   }
-  
-  if (renderer) SDL_DestroyRenderer(renderer);
-  if (win) SDL_DestroyWindow(win);
-  SDL_Quit();
-  return 0;
 }
-
-SDL_Rect SDLBoxPut(int width, int height, int x, int y){
-  SDL_Rect out;
-  out.w = width;
-  out.h = height;
-  out.x = x;
-  out.y = y;
-  return out;
-}
-
