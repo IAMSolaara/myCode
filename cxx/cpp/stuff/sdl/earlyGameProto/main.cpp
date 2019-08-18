@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -9,8 +10,8 @@ using namespace std;
 #define SCRHEIGHT 480
 #define SPRWIDTH  32
 #define SPRHEIGHT 32
-#define SPRDESTWIDTH  32
-#define SPRDESTHEIGHT 32
+#define SPRDESTWIDTH  64
+#define SPRDESTHEIGHT 64
 
 int main(){
   //declare window, renderer and events
