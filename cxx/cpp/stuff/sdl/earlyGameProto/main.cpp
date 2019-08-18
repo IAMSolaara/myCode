@@ -10,8 +10,8 @@ using namespace std;
 #define SCRHEIGHT 480
 #define SPRWIDTH  32
 #define SPRHEIGHT 32
-#define SPRDESTWIDTH  64
-#define SPRDESTHEIGHT 64
+#define SPRDESTWIDTH  32
+#define SPRDESTHEIGHT 32
 
 int main(){
   //declare window, renderer and events
@@ -39,6 +39,11 @@ int main(){
   //declare source direction vars
   int dirX = 1;
   int dirY = 1;
+
+  //declare music
+  Mix_Music *bgmusic = NULL;
+
+
   
   //init
   
@@ -52,32 +57,42 @@ int main(){
       error << "Failed to create a window: " << SDL_GetError();
       throw(error.str());
     }
-    if ((renderer = SDL_CreateRenderer(win, -1, (SDL_RENDERER_ACCELERATED))) == 0) {                                    //create renderer for main window in index -1, accelerated and using VSync
+    if ((renderer = SDL_CreateRenderer(win, -1, (SDL_RENDERER_ACCELERATED))) == NULL) {                                    //create renderer for main window in index -1, accelerated and using VSync
       error << "Failed to initialize renderer: " << SDL_GetError();
       throw(error.str());
     }
     // load player spritesheet
-    if ((imgSurface = IMG_Load("res/spritesheets/link.png")) == 0){
+    if ((imgSurface = IMG_Load("res/spritesheets/link.png")) == NULL){
       error << "Failed to load image to surface: " << SDL_GetError();
       throw(error.str());
     }
-    if ((playerSpriteSheetTexture = SDL_CreateTextureFromSurface(renderer, imgSurface)) == 0){
+    if ((playerSpriteSheetTexture = SDL_CreateTextureFromSurface(renderer, imgSurface)) == NULL){
       error << "Failed to initialize image texture: " << SDL_GetError();
       throw(error.str());
     }
     SDL_FreeSurface(imgSurface);
     
     // load player spritesheet
-    if ((imgSurface = IMG_Load("res/bg/grass_2.png")) == 0){
+    if ((imgSurface = IMG_Load("res/bg/grass_2.png")) == NULL){
       error << "Failed to load image to surface: " << SDL_GetError();
       throw(error.str());
     }
-    if ((bgTexture = SDL_CreateTextureFromSurface(renderer, imgSurface)) == 0){
+    if ((bgTexture = SDL_CreateTextureFromSurface(renderer, imgSurface)) == NULL){
       error << "Failed to initialize image texture: " << SDL_GetError();
       throw(error.str());
     }
     SDL_FreeSurface(imgSurface);
-    SDL_Delay(2000);                                                                                                                                //delay 2 seconds, used for testing
+    //init audio
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+      error << "Failed to initialize audio: " << SDL_GetError();
+      throw(error.str());
+    }
+
+    //load music
+    if ((bgmusic = Mix_LoadMUS("res/music/bgmusic.ogg")) == NULL){
+      error << "Failed to load music: " << SDL_GetError();
+      throw(error.str());
+    }
   }
 
   catch (string error_str) {
@@ -92,6 +107,8 @@ int main(){
 
   double beforeTime = SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency();
   double speed = 0.5f;
+
+  Mix_PlayMusic(bgmusic, -1);
   
   while (mainLoop) {
     while (SDL_PollEvent(&events)){
@@ -142,9 +159,7 @@ int main(){
     SDL_QueryTexture(playerSpriteSheetTexture, NULL, NULL, &imgW, &imgH);
 
     if (srcX == (imgW - SPRWIDTH)) {
-      cout << srcY << " ";
       srcX = 0;
-      cout << srcY << "\n";
     }
     if (spriteShift > 63) {
       srcX = srcX + SPRWIDTH;
@@ -170,6 +185,11 @@ int main(){
   
   if (renderer) SDL_DestroyRenderer(renderer);
   if (win) SDL_DestroyWindow(win);
+
+  if (bgmusic) Mix_FreeMusic(bgmusic);
+
+  Mix_Quit();
+  IMG_Quit();
   SDL_Quit();
   return 0;
 }
