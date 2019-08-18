@@ -6,12 +6,12 @@
 #include <iostream>
 using namespace std;
 
-#define SCRWIDTH  640
-#define SCRHEIGHT 480
+#define SCRWIDTH  800
+#define SCRHEIGHT 600
 #define SPRWIDTH  32
 #define SPRHEIGHT 32
-#define SPRDESTWIDTH  128
-#define SPRDESTHEIGHT 128
+#define SPRDESTWIDTH  64
+#define SPRDESTHEIGHT 64
 #define SPRSPEED 2
 
 int main(){
@@ -169,7 +169,7 @@ int main(){
     //down arrow is pressed
     else if (state[SDL_SCANCODE_DOWN]) {
       srcY = 0;
-      if (playerDestRect.y < SCRWIDTH - playerDestRect.h) {
+      if (playerDestRect.y < SCRHEIGHT - playerDestRect.h) {
 	playerDestRect.y += SPRSPEED;
 	moving = true;
       }
