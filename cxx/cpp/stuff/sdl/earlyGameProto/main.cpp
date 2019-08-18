@@ -9,8 +9,8 @@ using namespace std;
 #define SCRHEIGHT 480
 #define SPRWIDTH  32
 #define SPRHEIGHT 32
-#define SPRDESTWIDTH  128
-#define SPRDESTHEIGHT 128
+#define SPRDESTWIDTH  32
+#define SPRDESTHEIGHT 32
 
 int main(){
   //declare window, renderer and events
@@ -19,8 +19,9 @@ int main(){
   SDL_Event events;
 
   //declare image file surface and texture
-  SDL_Surface* playerSpriteSheetSurface;
+  SDL_Surface* imgSurface;
   SDL_Texture* playerSpriteSheetTexture;
+  SDL_Texture* bgTexture;
 
   //declare destination and source rects
   SDL_Rect playerDestRect = {5, 5, SPRDESTWIDTH, SPRDESTHEIGHT};
@@ -54,16 +55,27 @@ int main(){
       error << "Failed to initialize renderer: " << SDL_GetError();
       throw(error.str());
     }
-    // load spritesheet
-    if ((playerSpriteSheetSurface = IMG_Load("images/link.png")) == 0){
+    // load player spritesheet
+    if ((imgSurface = IMG_Load("res/spritesheets/link.png")) == 0){
       error << "Failed to load image to surface: " << SDL_GetError();
       throw(error.str());
     }
-    if ((playerSpriteSheetTexture = SDL_CreateTextureFromSurface(renderer, playerSpriteSheetSurface)) == 0){
+    if ((playerSpriteSheetTexture = SDL_CreateTextureFromSurface(renderer, imgSurface)) == 0){
       error << "Failed to initialize image texture: " << SDL_GetError();
       throw(error.str());
     }
+    SDL_FreeSurface(imgSurface);
     
+    // load player spritesheet
+    if ((imgSurface = IMG_Load("res/bg/grass_2.png")) == 0){
+      error << "Failed to load image to surface: " << SDL_GetError();
+      throw(error.str());
+    }
+    if ((bgTexture = SDL_CreateTextureFromSurface(renderer, imgSurface)) == 0){
+      error << "Failed to initialize image texture: " << SDL_GetError();
+      throw(error.str());
+    }
+    SDL_FreeSurface(imgSurface);
     SDL_Delay(2000);                                                                                                                                //delay 2 seconds, used for testing
   }
 
@@ -78,7 +90,7 @@ int main(){
   bool mainLoop = true;
 
   double beforeTime = SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency();
-  double speed = 1.0f;
+  double speed = 0.5f;
   
   while (mainLoop) {
     while (SDL_PollEvent(&events)){
@@ -145,13 +157,15 @@ int main(){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
+    SDL_RenderCopy(renderer, bgTexture, NULL, NULL);
+    
     SDL_RenderCopy(renderer, playerSpriteSheetTexture, &playerSrcRect, &playerDestRect);
     
     SDL_RenderPresent(renderer);
   }
 
   if (playerSpriteSheetTexture) SDL_DestroyTexture(playerSpriteSheetTexture);
-  if (playerSpriteSheetSurface) SDL_FreeSurface(playerSpriteSheetSurface);
+  if (imgSurface) 
   
   if (renderer) SDL_DestroyRenderer(renderer);
   if (win) SDL_DestroyWindow(win);
