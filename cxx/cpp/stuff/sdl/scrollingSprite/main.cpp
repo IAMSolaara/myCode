@@ -7,6 +7,8 @@ using namespace std;
 
 #define SCRWIDTH  640
 #define SCRHEIGHT 480
+#define SPRWIDTH  128
+#define SPRHEIGHT 128
 
 SDL_Rect SDLBoxPut(int width, int height, int x, int y);
 
@@ -19,6 +21,18 @@ int main(){
   SDL_Surface* imgFile;
   SDL_Texture* imgTexture;
 
+  SDL_Rect imgDest = {5, 5, SPRWIDTH, SPRHEIGHT};
+  SDL_Rect imgSrc = {0, 0, SPRWIDTH, SPRHEIGHT};
+
+  int srcX = 0;
+  int srcY = 0;
+
+  int imgW = 0;
+  int imgH = 0;
+
+  int dirX = 1;
+  int dirY = 1;
+  
   //init()
   
   std::stringstream error;
@@ -70,10 +84,32 @@ int main(){
     double deltaTime = (currentTime - beforeTime) * 1000;
     beforeTime = currentTime;
 
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    if (state[SDL_SCANCODE_LEFT]) if (imgDest.x > 0) imgDest.x -= (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_RIGHT]) if (imgDest.x < SCRWIDTH - imgDest.w) imgDest.x += (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_UP]) if (imgDest.y > 0) imgDest.y -= (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_DOWN]) if (imgDest.y < SCRWIDTH - imgDest.h) imgDest.y += (int)(speed * deltaTime);
+
+    imgSrc.x = srcX;
+    imgSrc.y = srcY;
+
+    SDL_QueryTexture(imgTexture, NULL, NULL, &imgW, &imgH);
+
+    if (srcX == (imgW - imgSrc.w)) dirX = -1;
+    if (srcX == 0) dirX = 1;
+    if (srcY == (imgH - imgSrc.h)) dirY = -1;
+    if (srcY == 0) dirY = 1;
+    
+    srcX = srcX + dirX;
+    srcY = srcY + dirY;
+    
+    imgDest.w = imgSrc.w;
+    imgDest.h = imgSrc.h;
+    
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    SDL_RenderCopy(renderer, imgTexture, NULL, NULL);
+    SDL_RenderCopy(renderer, imgTexture, &imgSrc, &imgDest);
     
     SDL_RenderPresent(renderer);
 

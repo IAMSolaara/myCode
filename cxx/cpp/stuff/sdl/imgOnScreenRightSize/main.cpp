@@ -19,6 +19,8 @@ int main(){
   SDL_Surface* imgFile;
   SDL_Texture* imgTexture;
 
+  SDL_Rect imgDest = {5, 5, 0, 0};
+  
   //init()
   
   std::stringstream error;
@@ -70,10 +72,12 @@ int main(){
     double deltaTime = (currentTime - beforeTime) * 1000;
     beforeTime = currentTime;
 
+    SDL_QueryTexture(imgTexture, NULL, NULL, &imgDest.w, &imgDest.h);
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    SDL_RenderCopy(renderer, imgTexture, NULL, NULL);
+    SDL_RenderCopy(renderer, imgTexture, NULL, &imgDest);
     
     SDL_RenderPresent(renderer);
 

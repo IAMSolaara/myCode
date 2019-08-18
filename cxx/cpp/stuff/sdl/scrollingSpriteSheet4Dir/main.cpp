@@ -7,19 +7,38 @@ using namespace std;
 
 #define SCRWIDTH  640
 #define SCRHEIGHT 480
-
-SDL_Rect SDLBoxPut(int width, int height, int x, int y);
-
+#define SPRWIDTH  32
+#define SPRHEIGHT 32
+#define DESTWIDTH  128
+#define DESTHEIGHT 128
 
 int main(){
+  //declare window, renderer and events
   SDL_Window* win = NULL;
   SDL_Renderer* renderer = NULL;
   SDL_Event events;
 
+  //declare image file surface and texture
   SDL_Surface* imgFile;
   SDL_Texture* imgTexture;
 
-  //init()
+  //declare destination and source rects
+  SDL_Rect imgDest = {5, 5, DESTWIDTH, DESTHEIGHT};
+  SDL_Rect imgSrc = {0, 0, SPRWIDTH, SPRHEIGHT};
+
+  //declare source coords
+  int srcX = 0;
+  int srcY = 0;
+
+  //declare image width and height vars
+  int imgW = 0;
+  int imgH = 0;
+
+  //declare source direction vars
+  int dirX = 1;
+  int dirY = 1;
+  
+  //init
   
   std::stringstream error;
   try{
@@ -35,7 +54,7 @@ int main(){
       error << "Failed to initialize renderer: " << SDL_GetError();
       throw(error.str());
     }
-    if ((imgFile = SDL_LoadBMP("images/test.bmp")) == 0){
+    if ((imgFile = IMG_Load("images/link.png")) == 0){
       error << "Failed to load image to surface: " << SDL_GetError();
       throw(error.str());
     }
@@ -52,6 +71,8 @@ int main(){
   }
 
   //mainloop()
+
+  int spriteShift = 0;
   
   bool mainLoop = true;
 
@@ -70,14 +91,39 @@ int main(){
     double deltaTime = (currentTime - beforeTime) * 1000;
     beforeTime = currentTime;
 
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    if (state[SDL_SCANCODE_LEFT]) if (imgDest.x > 0) imgDest.x -= (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_RIGHT]) if (imgDest.x < SCRWIDTH - imgDest.w) imgDest.x += (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_UP]) if (imgDest.y > 0) imgDest.y -= (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_DOWN]) if (imgDest.y < SCRWIDTH - imgDest.h) imgDest.y += (int)(speed * deltaTime);
+
+    SDL_QueryTexture(imgTexture, NULL, NULL, &imgW, &imgH);
+
+    if (srcX == (imgW - SPRWIDTH)) {
+      srcX = 0;
+      srcY = srcY + SPRHEIGHT;
+    }
+    if (srcY >= (imgH)) {
+      srcY = 0;
+    }
+
+    if (spriteShift > 63) {
+      srcX = srcX + SPRWIDTH;
+      spriteShift = 0;
+    }
+    else spriteShift++;
+
+    imgSrc.x = srcX;
+    imgSrc.y = srcY;
+    
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    SDL_RenderCopy(renderer, imgTexture, NULL, NULL);
+    SDL_RenderCopy(renderer, imgTexture, &imgSrc, &imgDest);
     
     SDL_RenderPresent(renderer);
 
-    SDL_Delay(1);
+
   }
 
   if (imgTexture) SDL_DestroyTexture(imgTexture);
@@ -88,15 +134,3 @@ int main(){
   SDL_Quit();
   return 0;
 }
-
-SDL_Rect SDLBoxPut(int width, int height, int x, int y){
-  SDL_Rect out;
-  out.w = width;
-  out.h = height;
-  out.x = x;
-  out.y = y;
-  return out;
-}
-
-
-

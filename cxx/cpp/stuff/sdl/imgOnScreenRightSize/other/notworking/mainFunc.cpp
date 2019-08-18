@@ -8,19 +8,26 @@ using namespace std;
 #define SCRWIDTH  640
 #define SCRHEIGHT 480
 
+void SDLInit(SDL_Window* win, SDL_Renderer* renderer);
 SDL_Rect SDLBoxPut(int width, int height, int x, int y);
-
+void SDLPrimaryLoop(SDL_Window* win, SDL_Renderer* renderer, SDL_Event events);
 
 int main(){
   SDL_Window* win = NULL;
   SDL_Renderer* renderer = NULL;
   SDL_Event events;
-
-  SDL_Surface* imgFile;
-  SDL_Texture* imgTexture;
-
-  //init()
   
+  SDLInit(win, renderer);               //init window with accelerated VSynced renderer
+
+  SDLPrimaryLoop(win, renderer, events);
+
+  if (renderer) SDL_DestroyRenderer(renderer);
+  if (win) SDL_DestroyWindow(win);
+  SDL_Quit();
+  return 0;
+}
+
+void SDLInit(SDL_Window* win, SDL_Renderer* renderer) {
   std::stringstream error;
   try{
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0){                                                                                                              //SDL library functions init.
@@ -35,24 +42,25 @@ int main(){
       error << "Failed to initialize renderer: " << SDL_GetError();
       throw(error.str());
     }
-    if ((imgFile = SDL_LoadBMP("images/test.bmp")) == 0){
-      error << "Failed to load image to surface: " << SDL_GetError();
-      throw(error.str());
-    }
-    if ((imgTexture = SDL_CreateTextureFromSurface(renderer, imgFile)) == 0){
-      error << "Failed to initialize image texture: " << SDL_GetError();
-      throw(error.str());
-    }
-    
     SDL_Delay(2000);                                                                                                                                //delay 2 seconds, used for testing
   }
 
   catch (string error_str) {
     cout << error_str << "\n";
   }
+} 
 
-  //mainloop()
-  
+SDL_Rect SDLBoxPut(int width, int height, int x, int y){
+  SDL_Rect out;
+  out.w = width;
+  out.h = height;
+  out.x = x;
+  out.y = y;
+  return out;
+}
+
+void SDLPrimaryLoop(SDL_Window* win, SDL_Renderer* renderer, SDL_Event events){
+  SDL_Rect box = SDLBoxPut(100, 100, SCRWIDTH/8, SCRHEIGHT/8);
   bool mainLoop = true;
 
   double beforeTime = SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency();
@@ -70,33 +78,19 @@ int main(){
     double deltaTime = (currentTime - beforeTime) * 1000;
     beforeTime = currentTime;
 
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    if (state[SDL_SCANCODE_LEFT]) if (box.x > 0) box.x -= (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_RIGHT]) if (box.x < SCRWIDTH) box.x += (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_UP]) if (box.y > 0) box.y -= (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_DOWN]) if (box.y < SCRWIDTH) box.y += (int)(speed * deltaTime);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    SDL_RenderCopy(renderer, imgTexture, NULL, NULL);
-    
+    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+    SDL_RenderFillRect(renderer, &box);
+
     SDL_RenderPresent(renderer);
 
     SDL_Delay(1);
   }
-
-  if (imgTexture) SDL_DestroyTexture(imgTexture);
-  if (imgFile) SDL_FreeSurface(imgFile);
-  
-  if (renderer) SDL_DestroyRenderer(renderer);
-  if (win) SDL_DestroyWindow(win);
-  SDL_Quit();
-  return 0;
 }
-
-SDL_Rect SDLBoxPut(int width, int height, int x, int y){
-  SDL_Rect out;
-  out.w = width;
-  out.h = height;
-  out.x = x;
-  out.y = y;
-  return out;
-}
-
-
-

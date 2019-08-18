@@ -19,6 +19,8 @@ int main(){
   SDL_Surface* imgFile;
   SDL_Texture* imgTexture;
 
+  SDL_Rect imgDest = {5, 5, 0, 0};
+  
   //init()
   
   std::stringstream error;
@@ -70,10 +72,19 @@ int main(){
     double deltaTime = (currentTime - beforeTime) * 1000;
     beforeTime = currentTime;
 
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    if (state[SDL_SCANCODE_LEFT]) if (imgDest.x > 0) imgDest.x -= (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_RIGHT]) if (imgDest.x < SCRWIDTH - imgDest.w) imgDest.x += (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_UP]) if (imgDest.y > 0) imgDest.y -= (int)(speed * deltaTime);
+    if (state[SDL_SCANCODE_DOWN]) if (imgDest.y < SCRWIDTH - imgDest.h) imgDest.y += (int)(speed * deltaTime);
+
+     
+    SDL_QueryTexture(imgTexture, NULL, NULL, &imgDest.w, &imgDest.h);
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    SDL_RenderCopy(renderer, imgTexture, NULL, NULL);
+    SDL_RenderCopy(renderer, imgTexture, NULL, &imgDest);
     
     SDL_RenderPresent(renderer);
 
