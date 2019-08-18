@@ -10,8 +10,9 @@ using namespace std;
 #define SCRHEIGHT 480
 #define SPRWIDTH  32
 #define SPRHEIGHT 32
-#define SPRDESTWIDTH  64
-#define SPRDESTHEIGHT 64
+#define SPRDESTWIDTH  128
+#define SPRDESTHEIGHT 128
+#define SPRSPEED 2
 
 int main(){
   //declare window, renderer and events
@@ -57,7 +58,7 @@ int main(){
       error << "Failed to create a window: " << SDL_GetError();
       throw(error.str());
     }
-    if ((renderer = SDL_CreateRenderer(win, -1, (SDL_RENDERER_ACCELERATED))) == NULL) {                                    //create renderer for main window in index -1, accelerated and using VSync
+    if ((renderer = SDL_CreateRenderer(win, -1, (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC))) == NULL) {                                    //create renderer for main window in index -1, accelerated and using VSync
       error << "Failed to initialize renderer: " << SDL_GetError();
       throw(error.str());
     }
@@ -111,10 +112,10 @@ int main(){
   
   bool mainLoop = true;
   bool moving;
-  
+  /*
   double beforeTime = SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency();
   double speed = 0.5f;
-
+  */
   Mix_PlayMusic(bgmusic, -1);
   
   while (mainLoop) {
@@ -126,11 +127,11 @@ int main(){
 	mainLoop = false;
 	break;
       }
-    }
+    }/*
     double currentTime = (double) SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency();
     double deltaTime = (currentTime - beforeTime) * 1000;
     beforeTime = currentTime;
-
+     */
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
     //if Z is pressed
@@ -142,7 +143,7 @@ int main(){
     if (state[SDL_SCANCODE_LEFT]) {
       srcY = 32;
       if (playerDestRect.x > 0) {
-	playerDestRect.x -= (int)(speed * deltaTime);
+	playerDestRect.x -= SPRSPEED;
 	moving = true;
       }
     }
@@ -151,7 +152,7 @@ int main(){
     else if (state[SDL_SCANCODE_RIGHT]) {
       srcY = 64;
       if (playerDestRect.x < SCRWIDTH - playerDestRect.w) {
-	playerDestRect.x += (int)(speed * deltaTime);
+	playerDestRect.x += SPRSPEED;
 	moving = true;
       }
     }
@@ -160,7 +161,7 @@ int main(){
     else if (state[SDL_SCANCODE_UP]) {
       srcY=96;
       if (playerDestRect.y > 0) {
-	playerDestRect.y -= (int)(speed * deltaTime);
+	playerDestRect.y -= SPRSPEED;
 	moving = true;
       }
     }
@@ -169,7 +170,7 @@ int main(){
     else if (state[SDL_SCANCODE_DOWN]) {
       srcY = 0;
       if (playerDestRect.y < SCRWIDTH - playerDestRect.h) {
-	playerDestRect.y += (int)(speed * deltaTime);
+	playerDestRect.y += SPRSPEED;
 	moving = true;
       }
     }
@@ -183,7 +184,7 @@ int main(){
     }
     
     if (moving) {
-      if (spriteShift > 63) {
+      if (spriteShift > 3) {
 	srcX = srcX + SPRWIDTH;
 	spriteShift = 0;
       }
