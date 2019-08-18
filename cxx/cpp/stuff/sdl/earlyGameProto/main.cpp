@@ -10,8 +10,8 @@ using namespace std;
 #define SCRHEIGHT 480
 #define SPRWIDTH  32
 #define SPRHEIGHT 32
-#define SPRDESTWIDTH  32
-#define SPRDESTHEIGHT 32
+#define SPRDESTWIDTH  64
+#define SPRDESTHEIGHT 64
 
 int main(){
   //declare window, renderer and events
@@ -43,7 +43,7 @@ int main(){
   //declare music
   Mix_Music *bgmusic = NULL;
 
-
+  Mix_Chunk *sfx1 = NULL;
   
   //init
   
@@ -93,6 +93,12 @@ int main(){
       error << "Failed to load music: " << SDL_GetError();
       throw(error.str());
     }
+
+    //load sfxs
+    if ((sfx1 = Mix_LoadWAV("res/sfx/bruh.ogg")) == NULL) {
+      error << "Failed to load SFXs: " << SDL_GetError();
+      throw(error.str());
+    }
   }
 
   catch (string error_str) {
@@ -104,13 +110,16 @@ int main(){
   int spriteShift = 0;
   
   bool mainLoop = true;
-
+  bool moving;
+  
   double beforeTime = SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency();
   double speed = 0.5f;
 
   Mix_PlayMusic(bgmusic, -1);
   
   while (mainLoop) {
+    moving = false;
+    SDL_PumpEvents();
     while (SDL_PollEvent(&events)){
       switch (events.type) {
       case SDL_QUIT:
@@ -124,49 +133,67 @@ int main(){
 
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
+    //if Z is pressed
+    if (state[SDL_SCANCODE_Z]) {
+      Mix_PlayChannel(-1, sfx1, 0);
+    }
+    
     //if left arrow is pressed
     if (state[SDL_SCANCODE_LEFT]) {
+      srcY = 32;
       if (playerDestRect.x > 0) {
 	playerDestRect.x -= (int)(speed * deltaTime);
-	srcY = 32;
+	moving = true;
       }
     }
     
     //right arrow is pressed
-    if (state[SDL_SCANCODE_RIGHT]) {
+    else if (state[SDL_SCANCODE_RIGHT]) {
+      srcY = 64;
       if (playerDestRect.x < SCRWIDTH - playerDestRect.w) {
 	playerDestRect.x += (int)(speed * deltaTime);
-	srcY = 64;
+	moving = true;
       }
     }
     
     //up arrow is pressed
-    if (state[SDL_SCANCODE_UP]) {
+    else if (state[SDL_SCANCODE_UP]) {
+      srcY=96;
       if (playerDestRect.y > 0) {
 	playerDestRect.y -= (int)(speed * deltaTime);
-	srcY=96;
+	moving = true;
       }
     }
 
     //down arrow is pressed
-    if (state[SDL_SCANCODE_DOWN]) {
+    else if (state[SDL_SCANCODE_DOWN]) {
+      srcY = 0;
       if (playerDestRect.y < SCRWIDTH - playerDestRect.h) {
 	playerDestRect.y += (int)(speed * deltaTime);
-	srcY = 0;
+	moving = true;
       }
     }
 
-    SDL_QueryTexture(playerSpriteSheetTexture, NULL, NULL, &imgW, &imgH);
+    else moving = false;
 
+    SDL_QueryTexture(playerSpriteSheetTexture, NULL, NULL, &imgW, &imgH);
+    
     if (srcX == (imgW - SPRWIDTH)) {
+      srcX = 32;
+    }
+    
+    if (moving) {
+      if (spriteShift > 63) {
+	srcX = srcX + SPRWIDTH;
+	spriteShift = 0;
+      }
+      else spriteShift++;
+    }
+
+    else {
       srcX = 0;
     }
-    if (spriteShift > 63) {
-      srcX = srcX + SPRWIDTH;
-      spriteShift = 0;
-    }
-    else spriteShift++;
-
+    
     playerSrcRect.x = srcX;
     playerSrcRect.y = srcY;
     
