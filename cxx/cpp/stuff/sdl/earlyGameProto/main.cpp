@@ -4,17 +4,23 @@
 #include <sstream>
 #include <string>
 #include <iostream>
+#include "classes.h"
 using namespace std;
 
-#define SCRWIDTH  800
-#define SCRHEIGHT 600
+#define INITSCRWIDTH  800
+#define INITSCRHEIGHT 600
 #define SPRWIDTH  32
 #define SPRHEIGHT 32
 #define SPRDESTWIDTH  64
 #define SPRDESTHEIGHT 64
-#define SPRSPEED 2
+#define INITSPRSPEED 2
+#define INITSPRSHFTSPEED 3
+
 
 int main(){
+
+  Sprite_SDL162 player;
+  
   //declare window, renderer and events
   SDL_Window* win = NULL;
   SDL_Renderer* renderer = NULL;
@@ -22,24 +28,12 @@ int main(){
 
   //declare image file surface and texture
   SDL_Surface* imgSurface;
-  SDL_Texture* playerSpriteSheetTexture;
+
   SDL_Texture* bgTexture;
 
-  //declare destination and source rects
-  SDL_Rect playerDestRect = {5, 5, SPRDESTWIDTH, SPRDESTHEIGHT};
-  SDL_Rect playerSrcRect = {0, 0, SPRWIDTH, SPRHEIGHT};
-
-  //declare source coords
-  int srcX = 0;
-  int srcY = 0;
-
-  //declare image width and height vars
-  int imgW = 0;
-  int imgH = 0;
-
-  //declare source direction vars
-  int dirX = 1;
-  int dirY = 1;
+  //declare screen dimension vars
+  int scrWidth = INITSCRWIDTH;
+  int scrHeight = INITSCRHEIGHT;  
 
   //declare music
   Mix_Music *bgmusic = NULL;
@@ -47,6 +41,11 @@ int main(){
   Mix_Chunk *sfx1 = NULL;
   
   //init
+  player.setSpriteDims(32,32);
+  player.setRects(SPRDESTWIDTH, SPRDESTHEIGHT, SPRWIDTH, SPRHEIGHT);
+  player.shiftSpeed = 3;
+  player.speed = 2;
+
   
   std::stringstream error;
   try{
@@ -54,7 +53,7 @@ int main(){
       error << "Failed to initialize SDL: " << SDL_GetError();                                                                                      //in case of errors, throw them
       throw(error.str());
     }
-    if ((win = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCRWIDTH, SCRHEIGHT, SDL_WINDOW_RESIZABLE)) == NULL){       //create main SDL window, 640 * 480, centered in both axis and resizable
+    if ((win = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, scrWidth, scrHeight, SDL_WINDOW_RESIZABLE)) == NULL){       //create main SDL window, 640 * 480, centered in both axis and resizable
       error << "Failed to create a window: " << SDL_GetError();
       throw(error.str());
     }
@@ -62,18 +61,10 @@ int main(){
       error << "Failed to initialize renderer: " << SDL_GetError();
       throw(error.str());
     }
-    // load player spritesheet
-    if ((imgSurface = IMG_Load("res/spritesheets/link.png")) == NULL){
-      error << "Failed to load image to surface: " << SDL_GetError();
-      throw(error.str());
-    }
-    if ((playerSpriteSheetTexture = SDL_CreateTextureFromSurface(renderer, imgSurface)) == NULL){
-      error << "Failed to initialize image texture: " << SDL_GetError();
-      throw(error.str());
-    }
-    SDL_FreeSurface(imgSurface);
+
+    player.loadTexture("res/spritesheets/link.png", renderer);
     
-    // load player spritesheet
+    // load background
     if ((imgSurface = IMG_Load("res/bg/grass_2.png")) == NULL){
       error << "Failed to load image to surface: " << SDL_GetError();
       throw(error.str());
@@ -112,10 +103,6 @@ int main(){
   
   bool mainLoop = true;
   bool moving;
-  /*
-  double beforeTime = SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency();
-  double speed = 0.5f;
-  */
   Mix_PlayMusic(bgmusic, -1);
   
   while (mainLoop) {
@@ -123,92 +110,101 @@ int main(){
     SDL_PumpEvents();
     while (SDL_PollEvent(&events)){
       switch (events.type) {
+      //handle window events
+      case SDL_WINDOWEVENT:
+	switch (events.window.event) {
+	case SDL_WINDOWEVENT_RESIZED:
+	  scrWidth = events.window.data1;
+	  scrHeight = events.window.data2;
+	  break;
+	}
+	break;
       case SDL_QUIT:
 	mainLoop = false;
 	break;
       }
-    }/*
-    double currentTime = (double) SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency();
-    double deltaTime = (currentTime - beforeTime) * 1000;
-    beforeTime = currentTime;
-     */
+    }
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
     //if Z is pressed
     if (state[SDL_SCANCODE_Z]) {
       Mix_PlayChannel(-1, sfx1, 0);
     }
+
+    //if X is pressed
+    if (state[SDL_SCANCODE_X]) {
+      player.speed = 4;
+    }
+
+    else player.speed = 2;
     
     //if left arrow is pressed
     if (state[SDL_SCANCODE_LEFT]) {
-      srcY = 32;
-      if (playerDestRect.x > 0) {
-	playerDestRect.x -= SPRSPEED;
+      player.srcRect.y = 32;
+      if (player.destRect.x > 0) {
+	player.destRect.x -= player.speed;
 	moving = true;
       }
     }
     
     //right arrow is pressed
     else if (state[SDL_SCANCODE_RIGHT]) {
-      srcY = 64;
-      if (playerDestRect.x < SCRWIDTH - playerDestRect.w) {
-	playerDestRect.x += SPRSPEED;
-	moving = true;
+      player.srcRect.y = 64;
+      if (player.destRect.x < scrWidth - player.destRect.w) {
+	player.destRect.x += player.speed;
+	moving = true; 
       }
     }
     
     //up arrow is pressed
     else if (state[SDL_SCANCODE_UP]) {
-      srcY=96;
-      if (playerDestRect.y > 0) {
-	playerDestRect.y -= SPRSPEED;
+      player.srcRect.y=96;
+      if (player.destRect.y > 0) {
+	player.destRect.y -= player.speed;
 	moving = true;
       }
     }
 
     //down arrow is pressed
     else if (state[SDL_SCANCODE_DOWN]) {
-      srcY = 0;
-      if (playerDestRect.y < SCRHEIGHT - playerDestRect.h) {
-	playerDestRect.y += SPRSPEED;
+      player.srcRect.y = 0;
+      if (player.destRect.y < scrHeight - player.destRect.h) {
+	player.destRect.y += player.speed;
 	moving = true;
       }
     }
 
     else moving = false;
 
-    SDL_QueryTexture(playerSpriteSheetTexture, NULL, NULL, &imgW, &imgH);
+    SDL_QueryTexture(player.texture, NULL, NULL, &player.spriteSheetWidth, &player.spriteSheetHeight);
     
-    if (srcX == (imgW - SPRWIDTH)) {
-      srcX = 32;
+    if (player.srcRect.x == (player.spriteSheetWidth - SPRWIDTH)) {
+      player.srcRect.x = 32;
     }
     
     if (moving) {
-      if (spriteShift > 3) {
-	srcX = srcX + SPRWIDTH;
+      if (spriteShift > player.shiftSpeed) {
+	player.srcRect.x += player.sprWidth;
 	spriteShift = 0;
       }
       else spriteShift++;
     }
 
     else {
-      srcX = 0;
+      player.srcRect.x = 0;
     }
-    
-    playerSrcRect.x = srcX;
-    playerSrcRect.y = srcY;
     
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
     SDL_RenderCopy(renderer, bgTexture, NULL, NULL);
     
-    SDL_RenderCopy(renderer, playerSpriteSheetTexture, &playerSrcRect, &playerDestRect);
+    SDL_RenderCopy(renderer, player.texture, &player.srcRect, &player.destRect);
     
     SDL_RenderPresent(renderer);
   }
 
-  if (playerSpriteSheetTexture) SDL_DestroyTexture(playerSpriteSheetTexture);
+  if (player.texture) SDL_DestroyTexture(player.texture);
   if (imgSurface) 
   
   if (renderer) SDL_DestroyRenderer(renderer);
