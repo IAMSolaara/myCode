@@ -91,12 +91,25 @@ class NPCSprite_SDL162 {
     if (ts >= 0 && ts < 63) {
       this->srcRect.y = NPCDIR_DOWN;
       this->destRect.y += speed;
+      moving = true;
     }
     if (ts >= 63 && ts < 127) {
+      this->srcRect.y = NPCDIR_RIGHT;
+      this->destRect.x += speed;
+      moving = true;
+    }
+    if (ts >= 127 && ts < 191) {
       this->srcRect.y = NPCDIR_UP;
       this->destRect.y -= speed;
+      moving = true;
     }
-    if (ts > 255) ts = 0;
+    if (ts >= 191 && ts < 255) {
+      this->srcRect.y = NPCDIR_LEFT;
+      this->destRect.x -= speed;
+      moving = true;
+    }
+    
+    if (ts >= 255) ts = 0;
   }
   
   void loadTexture(const char* path, SDL_Renderer* render) {
@@ -159,6 +172,10 @@ class NPCSprite_SDL162 {
   int shiftSpeed;
   //sprite movement speed
   int speed;
+
+  bool moving;
+
+  int shiftCont;
 };
 
 
@@ -226,5 +243,9 @@ class Sprite_SDL162 {
   int shiftSpeed;
   //sprite movement speed
   int speed;
+
+  bool moving;
+
+  int shiftCont = 0;
 };
 #endif
