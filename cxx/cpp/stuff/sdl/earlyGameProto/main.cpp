@@ -20,6 +20,7 @@ using namespace std;
 int main(){
 
   Sprite_SDL162 player;
+  NPCSprite_SDL162 npc1;
   
   //declare window, renderer and events
   SDL_Window* win = NULL;
@@ -46,10 +47,14 @@ int main(){
   
   //init
   player.setSpriteDims(32,32);
-  player.setRects(SPRDESTWIDTH, SPRDESTHEIGHT, SPRWIDTH, SPRHEIGHT);
+  player.setRects(5, 5, SPRDESTWIDTH, SPRDESTHEIGHT, SPRWIDTH, SPRHEIGHT);
   player.shiftSpeed = 3;
   player.speed = 2;
 
+  npc1.setSpriteDims(32,32);
+  npc1.setRects(120, 120, SPRDESTWIDTH, SPRDESTHEIGHT, SPRWIDTH, SPRHEIGHT);
+  npc1.shiftSpeed = 3;
+  npc1.speed = 2;
   
   std::stringstream error;
   try{
@@ -67,6 +72,7 @@ int main(){
     }
 
     player.loadTexture("res/spritesheets/link.png", renderer);
+    npc1.loadTexture("res/spritesheets/cuteRpg.png", renderer);
     
     // load background
     if ((imgSurface = IMG_Load("res/bg/grass_2.png")) == NULL){
@@ -183,10 +189,18 @@ int main(){
 
     else moving = false;
 
+    npc1.movePath();
+    npc1.ts += 1;
+    
     SDL_QueryTexture(player.texture, NULL, NULL, &player.spriteSheetWidth, &player.spriteSheetHeight);
+    SDL_QueryTexture(npc1.texture, NULL, NULL, &npc1.spriteSheetWidth, &npc1.spriteSheetHeight);
     
     if (player.srcRect.x == (player.spriteSheetWidth - SPRWIDTH)) {
       player.srcRect.x = 32;
+    }
+    
+    if (npc1.srcRect.x == (npc1.spriteSheetWidth - SPRWIDTH)) {
+      npc1.srcRect.x = 32;
     }
     
     if (moving) {
@@ -205,6 +219,8 @@ int main(){
     SDL_RenderClear(renderer);
 
     SDL_RenderCopy(renderer, bgTexture, NULL, &bgDestRect);
+
+    SDL_RenderCopy(renderer, npc1.texture, &npc1.srcRect, &npc1.destRect);
     
     SDL_RenderCopy(renderer, player.texture, &player.srcRect, &player.destRect);
     
@@ -212,6 +228,7 @@ int main(){
   }
 
   if (player.texture) SDL_DestroyTexture(player.texture);
+  if (npc1.texture) SDL_DestroyTexture(npc1.texture);
   if (imgSurface) 
   
   if (renderer) SDL_DestroyRenderer(renderer);

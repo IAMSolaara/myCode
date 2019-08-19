@@ -5,6 +5,163 @@
 using namespace std;
 
 #define CLASSES_H
+#define NPCDIR_LEFT 32
+#define NPCDIR_RIGHT 64
+#define NPCDIR_DOWN 0
+#define NPCDIR_UP 96
+
+
+//define NPCsprite class
+class PlaceSprite_SDL162 {
+ public:
+  //constructor
+  PlaceSprite_SDL162(){};
+
+  void loadTexture(const char* path, SDL_Renderer* render) {
+    SDL_Surface* tmpSurface = NULL;
+    stringstream error;
+    try {
+      // load player spritesheet
+      if ((tmpSurface = IMG_Load(path)) == NULL){
+	error << "Failed to load image to surface: " << SDL_GetError();
+	throw(error.str());
+      }
+      
+      if ((texture = SDL_CreateTextureFromSurface(render, tmpSurface)) == NULL){
+	error << "Failed to initialize image texture: " << SDL_GetError();
+	throw(error.str());
+      }
+    }
+    
+    catch (string error_str) {
+      cout << error_str << "\n";
+    }
+    
+    SDL_FreeSurface(tmpSurface);
+  }
+
+  void setRects(int x, int y, int destW, int destH, int srcW, int srcH){
+
+    destRect = {x, y, destW, destH};
+    srcRect = {0, 0, srcW, srcH};
+  }
+
+  void setSpriteDims(int w, int h) {
+    sprWidth = w;
+    sprHeight = h;
+  }
+
+  int ts = 0;
+  
+  int sprWidth;
+  int sprHeight;
+  
+  int destWidth;
+  int destHeight;
+  
+  //declare destination and source rects
+  SDL_Rect destRect;
+  SDL_Rect srcRect;
+
+  //declare source coords
+  int srcX = 0;
+  int srcY = 0;
+
+  //declare image width and height vars
+  int spriteSheetWidth = 0;
+  int spriteSheetHeight = 0;
+  
+  //sprite texture
+  SDL_Texture *texture = NULL;
+  //sprite animation speed
+  int shiftSpeed;
+  //sprite movement speed
+  int speed;
+};
+
+
+
+//define NPCsprite class
+class NPCSprite_SDL162 {
+ public:
+  //constructor
+  NPCSprite_SDL162(){};
+
+  void movePath(){
+    if (ts >= 0 && ts < 63) {
+      this->srcRect.y = NPCDIR_DOWN;
+      this->destRect.y += speed;
+    }
+    if (ts >= 63 && ts < 127) {
+      this->srcRect.y = NPCDIR_UP;
+      this->destRect.y -= speed;
+    }
+    if (ts > 255) ts = 0;
+  }
+  
+  void loadTexture(const char* path, SDL_Renderer* render) {
+    SDL_Surface* tmpSurface = NULL;
+    stringstream error;
+    try {
+      // load player spritesheet
+      if ((tmpSurface = IMG_Load(path)) == NULL){
+	error << "Failed to load image to surface: " << SDL_GetError();
+	throw(error.str());
+      }
+      
+      if ((texture = SDL_CreateTextureFromSurface(render, tmpSurface)) == NULL){
+	error << "Failed to initialize image texture: " << SDL_GetError();
+	throw(error.str());
+      }
+    }
+    
+    catch (string error_str) {
+      cout << error_str << "\n";
+    }
+    
+    SDL_FreeSurface(tmpSurface);
+  }
+
+  void setRects(int x, int y, int destW, int destH, int srcW, int srcH){
+
+    destRect = {x, y, destW, destH};
+    srcRect = {0, 0, srcW, srcH};
+  }
+
+  void setSpriteDims(int w, int h) {
+    sprWidth = w;
+    sprHeight = h;
+  }
+
+  int ts = 0;
+  
+  int sprWidth;
+  int sprHeight;
+  
+  int destWidth;
+  int destHeight;
+  
+  //declare destination and source rects
+  SDL_Rect destRect;
+  SDL_Rect srcRect;
+
+  //declare source coords
+  int srcX = 0;
+  int srcY = 0;
+
+  //declare image width and height vars
+  int spriteSheetWidth = 0;
+  int spriteSheetHeight = 0;
+  
+  //sprite texture
+  SDL_Texture *texture = NULL;
+  //sprite animation speed
+  int shiftSpeed;
+  //sprite movement speed
+  int speed;
+};
+
+
 //define sprite class
 class Sprite_SDL162 {
  public:
@@ -34,9 +191,9 @@ class Sprite_SDL162 {
     SDL_FreeSurface(tmpSurface);
   }
 
-  void setRects(int destW, int destH, int srcW, int srcH){
+  void setRects(int x, int y, int destW, int destH, int srcW, int srcH){
 
-    destRect = {5, 5, destW, destH};
+    destRect = {x, y, destW, destH};
     srcRect = {0, 0, srcW, srcH};
   }
 
@@ -69,9 +226,5 @@ class Sprite_SDL162 {
   int shiftSpeed;
   //sprite movement speed
   int speed;
-
-  
-
-
 };
 #endif
