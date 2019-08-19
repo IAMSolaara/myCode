@@ -35,6 +35,10 @@ int main(){
   int scrWidth = INITSCRWIDTH;
   int scrHeight = INITSCRHEIGHT;  
 
+  //declare background rects
+  SDL_Rect bgDestRect = {0, 0, scrWidth, scrHeight};
+  //  SDL_Rect bgSrcRect = {0, 0, scrWidth / 2, scrHeight / 2};
+  
   //declare music
   Mix_Music *bgmusic = NULL;
 
@@ -114,8 +118,8 @@ int main(){
       case SDL_WINDOWEVENT:
 	switch (events.window.event) {
 	case SDL_WINDOWEVENT_RESIZED:
-	  scrWidth = events.window.data1;
-	  scrHeight = events.window.data2;
+	  bgDestRect.w = scrWidth = events.window.data1;
+	  bgDestRect.h = scrHeight = events.window.data2;
 	  break;
 	}
 	break;
@@ -151,6 +155,7 @@ int main(){
     else if (state[SDL_SCANCODE_RIGHT]) {
       player.srcRect.y = 64;
       if (player.destRect.x < scrWidth - player.destRect.w) {
+	
 	player.destRect.x += player.speed;
 	moving = true; 
       }
@@ -160,6 +165,7 @@ int main(){
     else if (state[SDL_SCANCODE_UP]) {
       player.srcRect.y=96;
       if (player.destRect.y > 0) {
+
 	player.destRect.y -= player.speed;
 	moving = true;
       }
@@ -169,6 +175,7 @@ int main(){
     else if (state[SDL_SCANCODE_DOWN]) {
       player.srcRect.y = 0;
       if (player.destRect.y < scrHeight - player.destRect.h) {
+
 	player.destRect.y += player.speed;
 	moving = true;
       }
@@ -197,7 +204,7 @@ int main(){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    SDL_RenderCopy(renderer, bgTexture, NULL, NULL);
+    SDL_RenderCopy(renderer, bgTexture, NULL, &bgDestRect);
     
     SDL_RenderCopy(renderer, player.texture, &player.srcRect, &player.destRect);
     
