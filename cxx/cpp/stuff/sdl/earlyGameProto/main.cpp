@@ -132,7 +132,7 @@ int main(){
 
     //if Z is pressed
     if (state[SDL_SCANCODE_Z]) {
-      Mix_PlayChannel(-1, sfx1, 0);
+      //      Mix_PlayChannel(-1, sfx1, 0);
     }
 
     //if X is pressed
