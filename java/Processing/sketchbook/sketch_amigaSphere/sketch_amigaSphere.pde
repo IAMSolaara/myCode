@@ -7,7 +7,7 @@ PImage img;
 
 
 void setup(){
-  size(850, 480, P3D);
+  size(1280, 720, P3D);
   sphere = createShape(SPHERE, sphrRadius/3);
   img = loadImage("checkerboard.jpg");
   sphere.setTexture(img);
