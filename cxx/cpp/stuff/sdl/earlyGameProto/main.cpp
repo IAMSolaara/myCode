@@ -95,7 +95,7 @@ int main(){
       error << "Failed to load music: " << SDL_GetError();
       throw(error.str());
     }
-
+    
     //load sfxs
     if ((sfx1 = Mix_LoadWAV("res/sfx/bruh.ogg")) == NULL) {
       error << "Failed to load SFXs: " << SDL_GetError();
