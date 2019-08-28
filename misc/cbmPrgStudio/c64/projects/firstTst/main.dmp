@@ -1,0 +1,17 @@
+00001  0000             *=8000
+00002  1F40             START:
+00003  1F40  A9 09                 LDA #$09
+00004  1F42  8D 20 D0              STA $D020
+00005  1F45             
+
+******* 1 Label(s) *******
+start: = $1F40 
+
+******* 1 Unused label(s) *******
+start:
+
+******* 1 Variable(s) *******
+tgt_c64  = $0001
+******* 1 Unused variables(s) *******
+tgt_c64
+
