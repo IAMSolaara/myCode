@@ -24,6 +24,7 @@ int main(){
 }
 
 int CGBMode(){
+  UBYTE cnt = 0;
   //declare coords and directions
   UBYTE x1 = 10;
   UBYTE y1 = 10;
@@ -32,10 +33,13 @@ int CGBMode(){
 
   UBYTE pal[] = {RGB_RED, RGB_GREEN, RGB_BLUE, RGB_YELLOW, RGB_CYAN, RGB_PINK, RGB_BLACK, RGB_WHITE};
   while (1){
-    line(x1, y1, x2, y2);
-    color(RGB_RED, RGB_BLACK, M_FILL);
-    x1 += x1;
-    y1 += y1;
+    if (cnt >= 255) {
+      line(x1, y1, x2, y2);
+      color(RGB_RED, RGB_BLACK, M_FILL);
+      x1 += x1;
+      y1 += y1;
+    }
+    cnt++;
   }
 }
 int DMGMode(){
