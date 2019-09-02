@@ -3,8 +3,8 @@
 #include "dude.c"
 
 void main(){
-  SPRITES_8x16;
-  set_sprite_data(0, 8, dude);
+  SPRITES_8x8;
+  set_sprite_data(0, 4, dude);
   set_sprite_tile(0, 0);
   move_sprite(0, 75, 75);
   //  set_sprite_tile(1, 2);
