@@ -33,7 +33,9 @@ int CGBMode(){
   UBYTE pal[] = {RGB_RED, RGB_GREEN, RGB_BLUE, RGB_YELLOW, RGB_CYAN, RGB_PINK, RGB_BLACK, RGB_WHITE};
   while (1){
     line(x1, y1, x2, y2);
-    color(pal[1], pal[2], M_FILL);
+    color(RGB_RED, RGB_BLACK, M_FILL);
+    x1 += x1;
+    y1 += y1;
   }
 }
 int DMGMode(){
