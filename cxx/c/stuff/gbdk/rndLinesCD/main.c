@@ -38,6 +38,7 @@ int CGBMode(){
       color(RGB_RED, RGB_BLACK, M_FILL);
       x1 += x1;
       y1 += y1;
+      cnt = 0;
     }
     cnt++;
   }
