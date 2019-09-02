@@ -15,7 +15,8 @@ int main(){
   case 0x11:
     st = CGBMode();
     break;
-  default:
+  case 0x01:
+  case 0xFF:
     st = DMGMode();
     break;
   }
