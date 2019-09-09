@@ -1,0 +1,6 @@
+##{0:0:0:main.prg}E:\gitRepos\myCode\misc\cbmPrgStudio\c64\projects\firstTst\main.asm
+
+        *=8000
+lda #$09
+sta $D020
+
