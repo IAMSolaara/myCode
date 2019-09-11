@@ -1,8 +1,12 @@
-CC = as
+CC = gcc
+LD = ld
 
-CCSWITCHES = 
+CCSWITCHES = -c
+LDSWITCHES = 
 
 TARGETS = main.s
+LDTARGETS = $(TARGETS:.s=.o)
 
 default:	main.s
 	${CC} ${CCSWITCHES} ${TARGETS}
+	${LD} ${LDSWITCHES} ${LDTARGETS}

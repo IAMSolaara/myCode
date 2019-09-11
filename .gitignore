@@ -3,4 +3,4 @@ a.out
 /Java/Java/**/out/
 *.swp
 /CXX/Arduino/libraries/*
-
+/asm/**/*.o
