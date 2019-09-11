@@ -1,7 +1,7 @@
-CC = gcc
+CC = as
 LD = ld
 
-CCSWITCHES = -c
+CCSWITCHES = -o main.o
 LDSWITCHES = 
 
 TARGETS = main.s
