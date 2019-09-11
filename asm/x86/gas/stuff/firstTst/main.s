@@ -13,5 +13,4 @@ _start:
 	xor %rdi, %rdi
 	syscall
 .data
-msg:
-.byte "Test", 10
+	msg: .ascii "Test\n"
