@@ -1,5 +1,5 @@
-.text
-.global _start
+	.text
+	.global _start
 
 _start:
 # put message in stdout
