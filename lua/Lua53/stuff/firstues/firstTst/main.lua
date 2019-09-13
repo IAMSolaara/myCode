@@ -7,4 +7,5 @@ end
 
 print "hello world"
 test(1);
+test(43);
 test(2);
