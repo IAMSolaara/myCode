@@ -1,3 +1,4 @@
+package com.mentalabs;
 import com.mentalabs.Calc;
 import java.util.Scanner;
 import javax.swing.*;
