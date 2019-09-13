@@ -8,5 +8,5 @@ clean:
 tojar:
 	javac *.java -d out/
 	echo "Manifest-Version: 1.0" > out/manifest.mf
-	echo "Main-Class: Main" >> out/manifest.mf
+	echo "Main-Class: com.mentalabs.Main" >> out/manifest.mf
 	cd out; jar cmf manifest.mf ../a.jar .
