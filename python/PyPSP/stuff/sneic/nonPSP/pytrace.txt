@@ -1,0 +1,30 @@
+-------------- Python-PSP started Fri Jan 11 21:47:13 2019
+
+Free memory: 719872
+PyPSP running in: ms0:/PSP/GAME/02HomeBrew Games/forPSP
+Could not find platform independent libraries <prefix>
+Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
+Search path: python.zip;ms0:/lib/python21.zip;ms0:/python/site-packages;ms0:/python
+
+'import site' failed; use -v for traceback
+--------------------------------------------------------------------------------
+-------------- Python-PSP started Fri Jan 11 21:51:43 2019
+
+Free memory: 719872
+PyPSP running in: ms0:/PSP/GAME/02HomeBrew Games/forPSP
+Could not find platform independent libraries <prefix>
+Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
+Search path: python.zip;ms0:/lib/python21.zip;ms0:/python/site-packages;ms0:/python
+
+'import site' failed; use -v for traceback
+--------------------------------------------------------------------------------
+-------------- Python-PSP started Fri Jan 11 21:56:58 2019
+
+Free memory: 719872
+PyPSP running in: ms0:/PSP/GAME/02HomeBrew Games/forPSP
+Could not find platform independent libraries <prefix>
+Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
+Search path: python.zip;ms0:/lib/python21.zip;ms0:/python/site-packages;ms0:/python
+
+'import site' failed; use -v for traceback
+--------------------------------------------------------------------------------
