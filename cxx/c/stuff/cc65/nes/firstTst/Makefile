@@ -1,2 +1,2 @@
 cl65make: main.c
-	cl65 main.c -t nes
+	cl65 -t nes main.c
