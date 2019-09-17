@@ -17,9 +17,9 @@ int main(int argc, char** argv){
 	GOLChamber camere(10, 10); 
 	//initialize rng
 	srand(time(NULL));
-	initscr();
+  initscr();
 
-	noecho();
+  noecho();
 	//create gen 0
 	camere.rndGen();
 	//dump chamber contents to console
@@ -28,11 +28,11 @@ int main(int argc, char** argv){
 	for (unsigned int cnt = 0; cnt < gens; cnt++) {
 		camere.advGen();
 		camere.ncdump();
-		getch();
+    getch();
 	}
 
 
-	endwin();
+  endwin();
 	return 0;
 }
 
