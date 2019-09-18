@@ -79,7 +79,7 @@ void printArray(const int w, const int h, const int scr[w][h]){
 void NCprintArray(const int w, const int h, const int scr[w][h]){
   for (int i = 0; i < w; i++){
     for (int j = 0; j < h; j++){
-      mvaddch(((scr[i][j]) ? '#' : ' '), i, j);
+      mvaddch( ((scr[i][j]) ? '#' : ' '), i, j );
     }
     //printf("\n");
   }
