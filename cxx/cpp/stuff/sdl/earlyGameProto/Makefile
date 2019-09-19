@@ -1,10 +1,17 @@
+CC := g++
+
+CSWITCHES := 
+CDSWITCHES := $(CSWITCHES) -g
+
 CFLAGS := `pkg-config --cflags sdl2 SDL2_image SDL2_mixer`
 
 CLIBS := `pkg-config --libs sdl2 SDL2_image SDL2_mixer`
 
-default:	main.cpp
-	g++ $(CFLAGS) main.cpp $(CLIBS)
-debug:		main.cpp
-	g++ $(CFLAGS) main.cpp $(CLIBS) -g
+TARGETS := main.cpp
+
+default:	$(TARGETS)
+	$(CC) $(CSWITCHES) $(CFLAGS) $(TARGETS) $(CLIBS)
+debug:		$(TARGETS)
+	$(CC) $(CDSWITCHES) $(CFLAGS) $(TARGETS) $(CLIBS)
 custom:
-	g++ $(CFLAGS) $(SRCARG) $(CLIBS)
+	$(CC) $(CFLAGS) $(SRCARG) $(CLIBS)
