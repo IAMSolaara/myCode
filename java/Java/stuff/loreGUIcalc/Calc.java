@@ -1,10 +1,16 @@
 package com.mentalabs;
 
+/**
+ * @author lorecast162
+ * @version 1.0
+ */
+
 public class Calc {
     private double x;
     private double y;
     private String op;
     private double result;
+
     public Calc(){
 	this.x = 0;
 	this.y = 0;
