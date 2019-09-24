@@ -28,41 +28,49 @@ public class Orologio {
     private int secondi;
 
     Orologio(int inOre, int inMin, int inSec) {
-        ore = inOre;
-        min = inMin;
-        sec = inSec;
+	if (!regola(inOre, inMin, inSec)){
+	    secondi = minuti = ore = 0;
+	}
     }
+    
     Orologio(int inOre, int inMin) {
-        ore = inOre;
-        min = inMin;
-        sec = 0;
+	if (!regola(inOre, inMin, 0)){
+	    secondi = minuti = ore = 0;
+	}
     }
+    
     Orologio(int inOre) {
-        ore = inOre;
-        min = 0;
-        sec = 0;
+	if (!regola(inOre, 0, 0)){
+	    secondi = minuti = ore = 0;
+	}
     }
+    
     Orologio() {
-        ore = 0;
-        min = 0;
-        sec = 0;
+	regola(0, 0, 0);
     }
 
+    //** ok mc
     public int getOre() {return ore;}
     public int getMinuti() {return min;}
     public int getSecondi() {return sec;}
 
+    //** ok mc
     public boolean regola(int inOre, int inMin, int inSec) {
         boolean result = true;
-        if (compreso(inSec, 0, 59)) sec = inSec;
+	
+        if (result && compreso(inSec, 0, 59)) secondi = inSec;
         else result = false;
-        if (compreso(inMin, 0, 59)) min = inMin;
+	
+        if (result && compreso(inMin, 0, 59)) minuti = inMin;
         else result = false;
-        if (compreso(inOre, 0, 23)) ore = inOre;
+	
+        if (result && compreso(inOre, 0, 23)) ore = inOre;
         else result = false;
+	
         return result;
     }
 
+    //** ok mc
     private boolean compreso(int query, int min, int max) {
         boolean result = true;
 
@@ -71,22 +79,21 @@ public class Orologio {
         return result;
     }
 
+    
     public void avanza(){
-        sec++;
+        secondi++;
         normalizza();
     }
 
     private void normalizza(){
-        int tmp;
-        if (sec > 59) {
-            tmp = sec % 60;
-            min += tmp;
-            sec -= tmp * 60;
+        if (secondi > 59) {
+            secondi = 0;
+	    minuti++;
         }
-        if (min > 59) {
-            tmp = min % 60;
-            ore += tmp;
-            min -= tmp * 60;
+        if (minuti > 59) {
+            minuti = 0;
+	    ore++;
         }
+	if (ore > 23) ore = 0;
     }
 }
