@@ -23,38 +23,80 @@
 */
 
 public class Orologio {
+    /** Attributo dove vengono memorizzate le ore.*/
     private int ore;
+    /** Attributo dove vengono memorizzati i minuti.*/
     private int minuti;
+    /** Attributo dove vengono memorizzati i secondi.*/
     private int secondi;
 
+    /**
+     * Costruttore con ore, minuti e secondi.
+     * @param inOre Ore da impostare
+     * @param inMin Minuti da impostare
+     * @param inSec Secondi da impostare
+     */
     Orologio(int inOre, int inMin, int inSec) {
 	if (!regola(inOre, inMin, inSec)){
 	    secondi = minuti = ore = 0;
 	}
     }
     
+    /**
+     * Costruttore con ore e minuti.
+     * I secondi avranno valore di default.
+     * @param inOre Ore da impostare
+     * @param inMin Minuti da impostare
+     */    
     Orologio(int inOre, int inMin) {
 	if (!regola(inOre, inMin, 0)){
 	    secondi = minuti = ore = 0;
 	}
     }
-    
+
+    /**
+     * Costruttore con ore.
+     * I secondi e i minuti avranno valore di default.
+     * @param inOre Ore da impostare
+     */    
     Orologio(int inOre) {
 	if (!regola(inOre, 0, 0)){
 	    secondi = minuti = ore = 0;
 	}
     }
-    
+
+    /**
+     * Costruttore di default.
+     * Tutti gli attributi avranno valore di default.
+     */
     Orologio() {
 	regola(0, 0, 0);
     }
 
     //** ok mc
+    /** Metodo get per ottenere le ore attualmente memorizzate nell'orologio.
+     * @return Le ore
+     */
     public int getOre() {return ore;}
+    
+    /** Metodo get per ottenere i minuti attualmente memorizzati nell'orologio.
+     * @return I minuti
+     */
     public int getMinuti() {return min;}
+    
+    /** Metodo get per ottenere i secondi attualmente memorizzati nell'orologio.
+     * @return I secondi
+     */
     public int getSecondi() {return sec;}
 
     //** ok mc
+    /**
+     * Funzione per regolare l'orologio.
+     * @param inOre Ore da impostare
+     * @param inMin Minuti da impostare
+     * @param inSec Secondi da impostare
+     * @return Il risultato dei controlli
+     */
     public boolean regola(int inOre, int inMin, int inSec) {
         boolean result = true;
 	
@@ -71,6 +113,13 @@ public class Orologio {
     }
 
     //** ok mc
+    /**
+     * Funzione per controllare che un valore sia entro determinati limiti.
+     * @param query Valore da controllare
+     * @param min Estremo minimo del limite
+     * @param max Estremo massimo del limite
+     * @return Risultato del controllo. true se e' entro i limiti, senno' false
+     */
     private boolean compreso(int query, int min, int max) {
         boolean result = true;
 
@@ -79,21 +128,36 @@ public class Orologio {
         return result;
     }
 
-    
+    //** ok mc
+    /**
+     * Metodo per avanzare l'orologio, chiama poi il metodo normalizza.
+     */
     public void avanza(){
         secondi++;
         normalizza();
     }
-
+    
+    /**
+     * Metodo per normalizzare l'orologio dopo che e' stato avanzato.
+     */
     private void normalizza(){
         if (secondi > 59) {
             secondi = 0;
 	    minuti++;
-        }
-        if (minuti > 59) {
-            minuti = 0;
-	    ore++;
-        }
-	if (ore > 23) ore = 0;
+	    if (minuti > 59) {
+		minuti = 0;
+		ore++;
+		if (ore > 23) ore = 0;
+	    }
+	}
+    }
+
+    /**
+     * Funzione per restituire lo stato dell'orologio in una stringa.
+     * @return Una stringa con dentro ore, minuti e secondi.
+     */
+    
+    public String toString(){
+	return "" + ore + ":" + minuti + ":" + secondi;
     }
 }
