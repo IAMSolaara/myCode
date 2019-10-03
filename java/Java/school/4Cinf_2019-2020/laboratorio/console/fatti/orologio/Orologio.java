@@ -66,6 +66,18 @@ public class Orologio {
     }
 
     /**
+     * Costruttore di copia.
+     * Verra' copiato lo stato dell'oggetto nel parametro in caso esso sia valido.
+     * @param in Oggetto da cui copiare lo stato.
+     */
+    Orologio(Orologio in) {
+	if (in != null) {
+	    regola(in.getOre(), in.getMinuti(), in.getSecondi());
+	}
+	else regola(0, 0, 0);
+    }
+
+    /**
      * Costruttore di default.
      * Tutti gli attributi avranno valore di default.
      */
@@ -82,12 +94,12 @@ public class Orologio {
     /** Metodo get per ottenere i minuti attualmente memorizzati nell'orologio.
      * @return I minuti
      */
-    public int getMinuti() {return min;}
+    public int getMinuti() {return minuti;}
     
     /** Metodo get per ottenere i secondi attualmente memorizzati nell'orologio.
      * @return I secondi
      */
-    public int getSecondi() {return sec;}
+    public int getSecondi() {return secondi;}
 
     //** ok mc
     /**
