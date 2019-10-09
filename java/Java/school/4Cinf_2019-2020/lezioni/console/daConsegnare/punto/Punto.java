@@ -23,6 +23,7 @@
 
   + toString(): String
   + posizione()
+  + equals(in o: Object): boolean
 */
 
 public class Punto{
@@ -102,5 +103,19 @@ public class Punto{
     else if (x > 0 && y < 0) res = QUAD3;
     else if (x < 0 && y < 0) res = QUAD4;
     return res;
+  }
+
+  /**
+  Confronto di due oggetti
+  @param o Oggetto da confrontare
+  @return true se i due oggetti hanno lo stesso stato, altrimenti false
+  */
+  public boolean equals(Object o) {
+    boolean result = true;
+    if (o == null || !(o instanceof Punto)) result = false;
+    else {
+      if (x != ((Punto)o).getX() || y != ((Punto)o).getY()) result = false;
+    }
+    return result;
   }
 }
