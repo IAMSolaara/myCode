@@ -37,7 +37,7 @@ public class Orologio {
      * @param inMin Minuti da impostare
      * @param inSec Secondi da impostare
      */
-    public Orologio(int inOre, int inMin, int inSec) {
+    Orologio(int inOre, int inMin, int inSec) {
 	if (!regola(inOre, inMin, inSec)){
 	    secondi = minuti = ore = 0;
 	}
@@ -49,7 +49,7 @@ public class Orologio {
      * @param inOre Ore da impostare
      * @param inMin Minuti da impostare
      */    
-    public Orologio(int inOre, int inMin) {
+    Orologio(int inOre, int inMin) {
 	if (!regola(inOre, inMin, 0)){
 	    secondi = minuti = ore = 0;
 	}
@@ -60,7 +60,7 @@ public class Orologio {
      * I secondi e i minuti avranno valore di default.
      * @param inOre Ore da impostare
      */    
-    public Orologio(int inOre) {
+    Orologio(int inOre) {
 	if (!regola(inOre, 0, 0)){
 	    secondi = minuti = ore = 0;
 	}
@@ -71,7 +71,7 @@ public class Orologio {
      * Verra' copiato lo stato dell'oggetto nel parametro in caso esso sia valido.
      * @param clk Oggetto da cui copiare lo stato.
      */
-    public Orologio(Orologio clk) {
+    Orologio(Orologio clk) {
 	if (clk != null) {
 	    regola(clk.getOre(), clk.getMinuti(), clk.getSecondi());
 	}
@@ -82,7 +82,8 @@ public class Orologio {
      * Costruttore di default.
      * Tutti gli attributi avranno valore di default.
      */
-    public :wOrologio() {regola(0, 0, 0);
+    Orologio() {
+	regola(0, 0, 0);
     }
 
     //** ok mc

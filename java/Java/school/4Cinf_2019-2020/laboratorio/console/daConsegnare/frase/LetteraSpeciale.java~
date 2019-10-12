@@ -1,0 +1,26 @@
+/**
+@author Lorenzo Cauli
+@version 1.0
+ */
+
+/*
+  - character: char
+  + caseOffset: int
+
+  + Lettera(in c: char)
+  + Lettera(in ref: Lettera)
+
+  + getCharacter(): char
+  + isMaiuscolo(): boolean
+
+  - compreso(in x, min, max: char): boolean
+  + switchCase(): void
+  + toString(): String
+  + equals(in o: Object): boolean
+
+ */
+
+public class LetteraSpeciale extends Lettera {
+    
+    
+}
