@@ -8,6 +8,11 @@ public class Test {
     System.out.println("P1" + p1.toString());
     p2 = new Punto(p1);
     System.out.println("P2" + p2.toString());
-    System.out.println("P3 e P1" + p3.equals(p1) ? "uguali" : "diversi");
+    System.out.println("P3 e P1 sono " + (p3.equals(p1) ? "uguali" : "diversi"));
+    System.out.println("P3" + p3.toString());
+    p3.trasla(1, -1);
+    System.out.println("P3" + p3.toString());
+    System.out.println("La distanza tra P1 e P3 e' " + p1.distanza(p3));
+    System.out.println("La distanza tra P1 e P2 e' " + p1.distanza(p2));
   }
 }
