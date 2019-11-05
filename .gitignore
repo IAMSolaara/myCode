@@ -4,3 +4,4 @@ a.out
 /CXX/Arduino/libraries/*
 /asm/**/*.o
 /README.site
+/java/Java/stuff/NetBeansProject/SchoolScheduleClient/target/

@@ -105,6 +105,10 @@ public class Port {
 		return out;
 	}
 	
+	/**Metodo per impostare il MAC Address della porta.
+	 @param MACAddress MAC Address nuovo da impostare alla porta.
+	 @return true se il parametro e' valido, false se non lo e'
+	 */
 	public boolean setMACAddress(String MACAddress) {
 		boolean out = true;
 		if (MACAddress != null) {
@@ -117,10 +121,17 @@ public class Port {
 		return out;
 	}
 
+	/**Metodo che restituisce lo stato dell'oggetto in una stringa.
+	 @return Una stringa con lo stato dell'oggetto.
+	 */
 	public String toString(){
 		return "Port ID: " + id + ", Port MAC Address: " + MACAddress;
 	}
 
+	/**Metodo che confronta lo stato di due oggetti.
+	 @param o Riferimento a oggetto con cui confrontarsi
+	 @return true se sono uguali, false se sono diversi
+	 */
 	public boolean equals(Object o) {
 		boolean out = true;
 		if (o != null && o instanceof Port) {
