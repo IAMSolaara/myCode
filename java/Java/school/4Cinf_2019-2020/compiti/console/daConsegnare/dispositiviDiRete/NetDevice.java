@@ -5,21 +5,10 @@
 
 /*
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  */
 
 public class NetDevice{
-	private String senderMAC;
-	private String receiverMAC;
-	private 
+	private String packetSenderMAC;
+	private String packetReceiverMAC;
+	private String packetInformation;
 }
