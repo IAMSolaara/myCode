@@ -15,6 +15,8 @@ public class Test {
 		fr1.add(dis);
 
 		dis.setSize(width,height);
+		System.out.println(dis.getFont());
+		dis.setFont(new Font("Dialog", 0, 50));
 
 		while (true) {
 			cnt +=0.000001;
