@@ -29,7 +29,7 @@ public class Merce {
 	 *	@param nome Nome della merce.
 	 *	@param p	Prezzo della merce.
 	 */
-	Merce(String nome, double p){
+	public Merce(String nome, double p){
 		if (nome != null) this.nome = nome;
 		else nome = "N/A";
 
@@ -37,10 +37,11 @@ public class Merce {
 		else this.prezzo = 8086;
 	}
 
-	/**Costruttore di copia
+	/**Costruttore di copia</br>
+	 * test
 	 * @param ref Riferimento all'oggetto da cui copiare.
 	 */
-	Merce(Merce ref){
+	public Merce(Merce ref){
 		if (ref != null) {
 			nome = ref.getNome();
 			prezzo = ref.getPrezzo();
