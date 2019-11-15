@@ -49,8 +49,8 @@ public class Triangolo {
 			this.p2 = new Punto(1,1);
 			this.p3 = new Punto(2,2);
 		}
-		area = calcArea();
-		perim = calcPerim();
+		calcArea();
+		calcPerim();
 	}
 
 	/** Costruttore di copia.
@@ -69,8 +69,8 @@ public class Triangolo {
 			p1 = new Punto(0,0);
 			p2 = new Punto(1,1);
 			p3 = new Punto(2,2);
-			area = calcArea();
-			perim = calcPerim();
+			calcArea();
+			calcPerim();
 		}
 	}
 
@@ -87,18 +87,18 @@ public class Triangolo {
 
 	/**Metodo che calcola il perimetro.*/
 	private void calcPerim(){
-		float l1 = p1.distanza(p2);
-		float l2 = p1.distanza(p3);
-		float l3 = p2.distanza(p3);
+		double l1 = p1.distanza(p2);
+		double l2 = p1.distanza(p3);
+		double l3 = p2.distanza(p3);
 		perim = l1+l2+l3;
 	}
 
 	/**Metodo che calcola l'area.*/
 	private void calcArea(){
-		float p = perim/2;
-		float l1 = p1.distanza(p2);
-		float l2 = p1.distanza(p3);
-		float l3 = p2.distanza(p3);
+		double p = perim/2;
+		double l1 = p1.distanza(p2);
+		double l2 = p1.distanza(p3);
+		double l3 = p2.distanza(p3);
 		area = Math.sqrt(p*(p-l1)*(p-l2)*(p-l3));
 	}
 
@@ -116,7 +116,7 @@ public class Triangolo {
 	 * @return Una stringa contenente lo stato dell'oggetto
 	 */
 	public String toString(){
-		return "P1(" + p1.getX() + ";" + p1.getY() + ") P2(" + p2.getX() + ";" + p2.getY() + ") P3(" + p3.getX() + ";" + p3.getY() + ") Perimetro: " + perim "Area: " + area;
+		return "P1(" + p1.getX() + ";" + p1.getY() + ") P2(" + p2.getX() + ";" + p2.getY() + ") P3(" + p3.getX() + ";" + p3.getY() + ") Perimetro: " + perim + "Area: " + area;
 	}
 
 	public boolean equals(Object o){
