@@ -82,7 +82,7 @@ public class Orologio {
 	 * Costruttore di default.
 	 * Tutti gli attributi avranno valore di default.
 	 */
-	public :wOrologio() {regola(0, 0, 0);
+	public Orologio() {regola(0, 0, 0);
 	}
 
 	//** ok mc
@@ -168,8 +168,23 @@ public class Orologio {
 	 * Funzione per restituire lo stato dell'orologio in una stringa.
 	 * @return Una stringa con dentro ore, minuti e secondi.
 	 */
-
 	public String toString(){
 		return "" + ore + ":" + minuti + ":" + secondi;
+	}
+
+	/**
+	  Metodo che confronta lo stato di quest'oggetto con quello di un altro.
+	  @param o Riferimento a Object con cui confrontarsi.
+	  @return true se sono uguali, false se sono diversi
+	  */
+	public boolean equals(Object o) {
+		boolean out = true;
+		if (o != null || o instanceof Orologio) {
+			if ( ((Orologio)o).getOre()     != ore    ||
+					((Orologio)o).getMinuti()  != minuti ||
+					((Orologio)o).getSecondi() != secondi   ) out = false;
+		}
+		else out = false;
+		return out;
 	}
 }
