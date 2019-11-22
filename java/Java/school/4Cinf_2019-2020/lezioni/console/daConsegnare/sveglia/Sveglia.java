@@ -32,6 +32,11 @@ public class Sveglia extends Orologio {
 	private int alarmMinuti;
 	private boolean alarmOn;
 
+	/**Costruttore dati ore, minuti e secondi
+	 *	@param ore Ore da impostare
+	 *	@param minuti Minuti da impostare.
+	 *	@param secondi Secondi da impostare
+	 */
 	public Sveglia(int ore, int minuti, int secondi) {
 		super(ore, minuti, secondi);
 		alarmOre = 0;
@@ -39,6 +44,9 @@ public class Sveglia extends Orologio {
 		alarmOn = false;
 	}
 
+	/**Costruttore di copia.
+	 *  @param s Riferimento a oggetto Sveglia.
+	 */
 	public Sveglia(Sveglia s){
 		super(s);
 		if (s != null) {
@@ -53,12 +61,20 @@ public class Sveglia extends Orologio {
 		}
 	}
 
+	/**Metodo che restituisce le ore della sveglia.*/
 	public int getAlarmOre(){return alarmOre;}
 
+	/**Metodo che restituisce le minuti della sveglia.*/
 	public int getAlarmMinuti(){return alarmMinuti;}
 
+	/**Metodo che restituisce lo stato di attivita' della sveglia.*/
 	public boolean isAlarmOn(){return alarmOn;}
 
+	/**Metodo per impostare l'allarme.
+	 *  @param alarmOre Ore della sveglia da impostare.
+	 *  @param alarmMinuti Minuti della sveglia da impostare.
+	 *  @return true se l'orario e' valido, false se non lo e'
+	 */
 	public boolean alarmRegola(int alarmOre, int alarmMinuti){
 		boolean out = true;
 		if (compreso(alarmOre, 0, 23) || compreso(alarmMinuti, 0, 59)) {
@@ -69,13 +85,16 @@ public class Sveglia extends Orologio {
 		return out;
 	}
 
+	/**Metodo che alterna gli stati di attivita' della sveglia*/
 	public void alarmSwitch(){alarmOn = !alarmOn;}
 
+	/**Metodo che avanza l'ora dell'orologio e controlla se e' ora di attivare l'allarme.*/
 	public void avanza() {
 		super.avanza();
 		if (alarmOn && getOre() == alarmOre && getMinuti() == alarmMinuti) suona();
 	}
 
+	/**Metodo che fa suonare la sveglia*/
 	public void suona(){
 		System.out.println("SVEGLIA");
 	}
@@ -88,6 +107,10 @@ public class Sveglia extends Orologio {
 		return super.toString() + "; Sveglia " + (alarmOn ? "accesa" : "spenta") + "; Orario allarme: " + alarmOre + ":" + alarmMinuti;
 	}
 
+	/**Metodo che confronta lo stato di quest'oggetto con quello di un altro.
+	 *  @param o Riferimento a oggetto Object
+	 *  @return true se sono uguali, false se sono diversi
+	 */
 	public boolean equals(Object o) {
 		boolean out = true;
 		if (o != null || o instanceof Sveglia){
