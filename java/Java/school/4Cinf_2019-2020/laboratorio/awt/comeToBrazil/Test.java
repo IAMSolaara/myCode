@@ -10,12 +10,13 @@ public class Test {
 		Frame fr1 = new Frame("Titolo");
 		fr1.setSize(width,height);
 		fr1.setVisible(true);
-		fr1.addWindowListener(new GestoreFinestra());
 		
 		Disegno dis = new Disegno(new Punto(100,54), new Punto(50,165));
 		fr1.add(dis);
 
 		dis.setSize(width,height);
+		System.out.println(dis.getFont());
+		dis.setFont(new Font("Dialog", 0, 50));
 
 		while (true) {
 			cnt +=0.000001;
