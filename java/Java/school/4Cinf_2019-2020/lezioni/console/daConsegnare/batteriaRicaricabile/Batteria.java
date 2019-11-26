@@ -20,7 +20,7 @@
  */
 
 public class Batteria {
-	private int carica;
+	protected int carica;
 
 	/**Costruttore di default.*/
 	public Batteria() {
@@ -59,7 +59,7 @@ public class Batteria {
 		return out;
 	}
 
-	private boolean compreso(int val, int min, int max) {
+	protected boolean compreso(int val, int min, int max) {
 		boolean out = true;
 		if (val < min || val > max) out = false;
 		return out;
