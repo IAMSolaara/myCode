@@ -16,13 +16,6 @@ public class Test {
 		fr1.add(dis);
 
 		dis.setSize(width,height);
-
-		while (true) {
-			cnt +=0.000001;
-			if (cnt >= 1) {
-				dis.repaint();
-				cnt = 0;
-			}
-		}
+		dis.addMouseListener(new GestoreMouse());
 	}
 }

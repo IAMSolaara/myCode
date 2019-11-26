@@ -1,17 +1,31 @@
 import java.awt.*;
 public class Disegno extends Canvas {
-	public Punto p1;
-	public Punto p2;
+	private Punto p1;
+	private Punto p2;
 
-	public Disegno(Punto p1, Punto p2){
-		this.p1 = new Punto(p1);
-		this.p2 = new Punto(p2);
+	public Disegno(){
+		this.p1 = null;
+		this.p2 = null;
 	}
 
 	public void paint(Graphics g){
-		g.drawLine((int)Math.round(p1.getX()), (int)Math.round(p1.getY()), (int)Math.round(p2.getX()), (int)Math.round(p2.getY()));
+		if (p1 != null && p2 != null)
+		g.drawLine((int)Math.round(p1.getX()), (int)Math.round(p1.getY()),
+				   (int)Math.round(p2.getX()), (int)Math.round(p2.getY()));
 	}
 
-	public Punto getP1(){return new Punto(p1);}
-	public Punto getP2(){return new Punto(p2);}
+	public Punto getP1(){
+		Punto out = null;
+		if (p1 != null) out = new Punto(p1);
+		return out;
+	}
+
+	public Punto getP2(){
+		Punto out = null;
+		if (p2 != null) out = new Punto(p2);
+		return out;
+	}
+
+	public void newP1(Punto p){p1 = new Punto(p);}
+	public void newP2(Punto p){p2 = new Punto(p);}
 }

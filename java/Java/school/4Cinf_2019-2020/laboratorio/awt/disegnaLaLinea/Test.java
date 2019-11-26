@@ -12,18 +12,10 @@ public class Test {
 		fr1.setVisible(true);
 		fr1.addWindowListener(new GestoreFinestra());
 		
-		Disegno dis = new Disegno(new Punto(100,54), new Punto(50,165));
+		Disegno dis = new Disegno();
 		fr1.add(dis);
 
 		dis.setSize(width,height);
 		dis.addMouseListener(new GestoreMouse());
-
-		while (true) {
-			cnt +=0.000001;
-			if (cnt >= 1) {
-				dis.repaint();
-				cnt = 0;
-			}
-		}
 	}
 }
