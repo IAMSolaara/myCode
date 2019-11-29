@@ -155,12 +155,12 @@ public class Stand {
 	 * @return Una stringa.
 	 */
 	public String toString() {
-		String nameString = "「Ｓｔａｎｄ　ｎａｍｅ：　" + name + "」 ";
-		String abilityString = "「Ｓｔａｎｄ　ａｂｉｌｉｔｙ：　" + ability + "」 ";
-		String battleCryString = "「Ｓｔａｎｄ　ｃｒｙ：　" + battleCry + "」 ";
+		String nameString = "「Ｓｔａｎｄ　ｎａｍｅ：　" + name + "」\n";
+		String abilityString = "「Ｓｔａｎｄ　ａｂｉｌｉｔｙ：　" + ability + "」\n";
+		String battleCryString = "「Ｓｔａｎｄ　ｃｒｙ：　" + battleCry + "」\n";
 		String statsString = "Stand stats: \n";
 		for (Stat entry : stats) {
-			statsString += entry.toString() + ",\n";
+			statsString += entry.toString() + "\n";
 		}
 		return nameString + abilityString + battleCryString + statsString;
 	}
