@@ -17,11 +17,14 @@ public class Client {
         fr.addWindowListener(new GestoreFinestra());
 
         Drawer d = new Drawer();
-       
-        d.addImg("172.16.2.4", 8086);
+        if (args.length == 2) {
+            d.addImg(args[0], Integer.parseInt(args[1]));
+        } else {
+            d.addImg("127.0.0.1", 8086);
+
+        }
         d.setSize(width, height);
         fr.add(d);
     }
 
-    
 }
