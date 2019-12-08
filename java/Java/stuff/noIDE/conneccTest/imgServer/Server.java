@@ -20,9 +20,6 @@ public class Server {
             File outFile = new File("./test.png");
             byte[] data = Files.readAllBytes(outFile.toPath());
             out.write(data);
-            Scanner sc = new Scanner(in);
-            BufferedReader buf = new BufferedReader(new InputStreamReader(in));
-            if (buf.readLine().equals("/stop")) System.out.println("Image sent succesfully.");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
