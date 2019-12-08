@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Client {
+public class GreetingsClient {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -43,7 +43,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        Client cliente = new Client();
+        GreetingsClient cliente = new GreetingsClient();
         cliente.connect("172.16.2.4", 8086);
         String msg = "hello server";
         String reply = cliente.sendMessage(msg);

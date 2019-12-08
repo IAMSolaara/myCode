@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class Server {
+public class GreetingsServer {
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
@@ -15,8 +15,10 @@ public class Server {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String greeting = in.readLine();
             if ("hello server".equals(greeting)) {
+                System.out.println("I got the right message.");
                 out.println("hello incel");
             } else {
+                System.out.println("idk who this cunt is, I'm kicking it out.");
                 out.println("YOU CAME TO THE WRONG HOUSE FOOL");
             }
         } catch (Exception ex) {
@@ -36,7 +38,7 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        Server srv = new Server();
+        GreetingsServer srv = new GreetingsServer();
         srv.start(8086);
     }
 }
