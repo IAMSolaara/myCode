@@ -4,25 +4,33 @@
  */
 
 /*
- * + maxPeso = 200: static final int # peso: int
+ * + MAXPESO = 200: static final int 
+ * - peso: int
+ * - prelevato: boolean
  * 
- * + Carrello() + Carrello(in in: Carrello)
+ * + Carrello() 
+ * + Carrello(in in: Carrello)
  * 
- * + getPeso(): int + carica(in dp: int): boolean
+ * + getPeso(): int 
+ * + isPrelevato(): boolean
+ * + carica(in dp: int): boolean
  * 
- * # compreso(in v, min, max): boolean
+ * - compreso(in v, min, max): boolean
  * 
- * + toString(): String + equals(in o: Object): boolean
+ * + toString(): String 
+ * + equals(in o: Object): boolean
  */
 public class Carrello {
-    public static final int maxPeso = 200;
-    protected int peso;
+    public static final int MAXPESO = 200;
+    private int peso;
+    private boolean prelevato;
 
     /**
      * Costruttore di default.
      */
     public Carrello() {
         peso = 0;
+        prelevato = false;
     }
 
     /**
@@ -31,10 +39,14 @@ public class Carrello {
      * @param in Riferimento a oggetto Carrello.
      */
     public Carrello(Carrello in) {
-        if (in != null)
+        if (in != null){
             peso = in.getPeso();
-        else
+            prelevato = in.isPrelevato();
+        }
+        else {
             peso = 0;
+            prelevato = false;
+        }
     }
 
     /**
@@ -47,6 +59,29 @@ public class Carrello {
     }
 
     /**
+     * Metodo che restituisce prelevato.
+     * @return Prelevato.
+     */
+    public boolean isPrelevato(){
+        return prelevato;
+    }
+
+    /**
+     * Metodo che preleva il carrello.
+     */
+    public boolean preleva(){
+        prelevato = true;
+        return true;
+    }
+
+    /**
+     * Metodo che deposita il carrello.
+     */
+    public void deposita(){
+        prelevato = false;
+    }
+
+    /**
      * Metodo che carica un determinato peso.
      * 
      * @param dp Il peso da caricare.
@@ -54,11 +89,18 @@ public class Carrello {
      */
     public boolean carica(int dp) {
         boolean out = true;
-
-        if (!compreso(peso + dp, 0, maxPeso))
-            out = false;
-        else
-            peso += dp;
+        if (prelevato) {
+            if (dp > 0) {
+                if (compreso(peso + dp, 0, MAXPESO)){
+                    peso += dp;                
+                }
+                else{
+                    out = false;
+                }
+            }
+            else out = false;
+        }
+        else out = false;
 
         return out;
     }
@@ -71,7 +113,7 @@ public class Carrello {
      * @param max Estremo massimo.
      * @return true se il valore e' entro i limiti, false se non lo e'
      */
-    protected boolean compreso(int v, int min, int max) {
+    private boolean compreso(int v, int min, int max) {
         boolean out = true;
         if (v < min || v > max)
             out = false;
@@ -84,7 +126,7 @@ public class Carrello {
      * @return Una stringa.
      */
     public String toString() {
-        return "Peso corrente: " + peso;
+        return "Peso corrente: " + peso + ", " + (prelevato ? "Prelevato" : "Non prelevato");
     }
 
     /**
@@ -96,7 +138,8 @@ public class Carrello {
     public boolean equals(Object o) {
         boolean out = true;
         if (o != null && o instanceof Carrello) {
-            if (((Carrello) o).getPeso() != peso)
+            if (((Carrello) o).getPeso()     != peso         ||
+                ((Carrello) o).isPrelevato() != prelevato  )
                 out = false;
         } else
             out = false;
