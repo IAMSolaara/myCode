@@ -15,7 +15,7 @@ import java.util.Arrays;
 
  + getPunti(): Punto[]
 
- + count(): int
+ + getCount(): int
 
  + append(in p: Punto): boolean
  + insert(in p: Punto, pos: int): boolean
@@ -28,10 +28,12 @@ import java.util.Arrays;
 
 public class Spezzata {
     private Punto[] punti;
+    int count;
 
     /**Costruttore di default. */
     public Spezzata() {
         punti = new Punto[100];
+        count = 0;
     }
 
     /**
@@ -41,6 +43,7 @@ public class Spezzata {
     public Spezzata(int dim) {
         if (dim <= 100 && dim > 0) punti = new Punto[dim];
         else punti = new Punto[100];
+        count = 0;
     }
 
     /**
@@ -53,8 +56,12 @@ public class Spezzata {
             for (int i = 0; i < punti.length; i++) {
                 this.punti[i] = punti[i];
             }
+            count = punti.length+1;
         }
-        else punti = new Punto[100];
+        else {
+            punti = new Punto[100];
+            count = 0;
+        }
     }
 
     /**
@@ -86,14 +93,8 @@ public class Spezzata {
      * Metodo che conta i punti.
      * @return Il conteggio dei punti.
      */
-    public int count() {
-        int out = 0;
-        int i = 0;
-        while (i < punti.length) {
-            if (punti[i] != null) out++;
-            i++;
-        }
-        return out;
+    public int getCount() {
+        return count;
     }
 
     /**
@@ -103,9 +104,10 @@ public class Spezzata {
      */
     public boolean append(Punto p) {
         boolean out = true;
-        if (count() >= 100) out = false;
+        if (count >= 100) out = false;
         else {
-            punti[count()] = new Punto(p);
+            punti[count] = new Punto(p);
+            count++;
         } 
         return out;
     }
@@ -142,7 +144,7 @@ public class Spezzata {
      * @return Una stringa.
      */
     public String toString() {
-        String out = "Numero punti: " + count() + "\n";
+        String out = "Numero punti: " + count + "\n";
         for (int i = 0; i < punti.length; i++) {
             if (punti[i] != null) out += String.format("\tPunto %d: %s\n", i, punti[i].toString());
         }
@@ -157,7 +159,10 @@ public class Spezzata {
     public boolean equals(Object o) {
         boolean out = true;
         if (o != null && o instanceof Spezzata) {
-            if ( !Arrays.equals( ((Spezzata)o).getPunti(), punti) ) out = false;
+            if ( 
+                !Arrays.equals( ((Spezzata)o).getPunti(), punti) ||
+                ((Spezzata)o).getCount() != count
+            ) out = false;
         }
         else out = false;
         return out;
