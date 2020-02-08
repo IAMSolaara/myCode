@@ -5,7 +5,7 @@ public class Test {
 	}
 
 	public static void main(String[] args) throws Exception {
-		AlberoDenteSega a = new AlberoDenteSega(21, 40);
+		AlberoDanaro a = new AlberoDanaro(21, 40);
 		for (int i = 0; i < 11; i++) {
 
 			clearScreen();

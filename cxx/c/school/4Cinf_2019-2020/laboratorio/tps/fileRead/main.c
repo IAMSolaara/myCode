@@ -13,31 +13,40 @@ int main(int argv, char **argc)
 		char *seps;
 		FILE *f = fopen(argc[1], "r");
 		char c[1000];
-		memset(c,0,sizeof(buf));
+
 		int lns = 0;
 		while (fgets(c, 1000, f) != NULL)
 		{
 			//declare buffer var array
-			char buf[1000];
+			char titolo[1000];
+			char autore[1000];
+
 			//zerofill buffer
-			memset(buf,0,sizeof(buf));
+			memset(titolo, 0, sizeof(titolo));
+			memset(autore, 0, sizeof(autore));
 
-			strcpy(buf, c);
-			//print temp buffer
-			printf("%s", buf);
+			//search for first pointer
+			char *p = strstr(c, ";");
 
-			//
-			char tmp[1000];
-			int sepPos = searchInString(buf, ';');
-
-			if (sepPos != -1) {
-				printf("%d\n", sepPos);
-				//strncpy(tmp, c, sepPos);
+			int sepPos = (p - c) + 1;
+			if (sepPos != -1)
+			{
+				strncpy(titolo, c, sepPos - 1);
 			}
 
-			printf("%s", tmp);
+			//search for second pointer
+			char* p2 = strstr(p+1, ";");
+			sepPos = (p2 - p) + 1;
+			if (sepPos != -1)
+			{
+				strncpy(autore, p+2, sepPos-3);
+			}
 
+			printf("Titolo libro: %s\n", titolo);
+			printf("Autore libro: %s\n", autore);
+			printf("\n");
 			lns++;
+			memset(c, 0, sizeof(c));
 		}
 
 		fclose(f);
@@ -51,8 +60,10 @@ int searchInString(const char str[], const char delim)
 	int out = -1;
 	int i = 0;
 	int len = strlen(str);
-	while (i < len && out != -1) {
-		if (str[i] == delim) out = i;
+	while (i < len && out != -1)
+	{
+		if (str[i] == delim)
+			out = i;
 		i++;
 	}
 	return out;
