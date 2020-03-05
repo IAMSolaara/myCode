@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - LPMidiHandler",
+            "request": "launch",
+            "mainClass": "LPMidiHandler"
+        }
+    ]
+}
