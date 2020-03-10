@@ -1,4 +1,5 @@
-/**  @author Cauli Lorenzo
+/**
+ * @author Cauli Lorenzo
  * @version 3/3/2020
  */
 
@@ -39,13 +40,15 @@ public class Nodo {
      * @param next Riferimento al nuovo prossimo nodo.
      */
     public void setNext(Nodo next) {this.next = next;}
+    
+    public Punto getPunto() {return new Punto(p);}
 
     /**
      * Metodo che restituisce lo stato dell'oggetto in una stringa
      * @return una stringa
      */
     public String toString() {
-	return p.toString();
+        return p.toString();
     }
 
     /**
