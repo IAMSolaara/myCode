@@ -1,0 +1,227 @@
+Quanto CPU: 1
+Nessun processo in esecuzione
+Prossimo PID: 4
+Processi pronti: Nome processo: init 
+Stato: pronto 
+Process Identifier: 1 
+Tempo di caricamento richiesto: 3 
+Tempo di caricamento ottenuto: 0
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 0
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 0
+
+
+Processo in exec: 
+Nome processo: init 
+Stato: pronto 
+Process Identifier: 1 
+Tempo di caricamento richiesto: 3 
+Tempo di caricamento ottenuto: 0
+
+Lista processi pronti: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 0
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 0
+
+*********
+Processo in exec: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 0
+
+Lista processi pronti: 
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 0
+Nome processo: init 
+Stato: pronto 
+Process Identifier: 1 
+Tempo di caricamento richiesto: 3 
+Tempo di caricamento ottenuto: 1
+
+*********
+Processo in exec: 
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 0
+
+Lista processi pronti: 
+Nome processo: init 
+Stato: pronto 
+Process Identifier: 1 
+Tempo di caricamento richiesto: 3 
+Tempo di caricamento ottenuto: 1
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 1
+
+*********
+Processo in exec: 
+Nome processo: init 
+Stato: pronto 
+Process Identifier: 1 
+Tempo di caricamento richiesto: 3 
+Tempo di caricamento ottenuto: 1
+
+Lista processi pronti: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 1
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 1
+
+*********
+Processo in exec: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 1
+
+Lista processi pronti: 
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 1
+Nome processo: init 
+Stato: pronto 
+Process Identifier: 1 
+Tempo di caricamento richiesto: 3 
+Tempo di caricamento ottenuto: 2
+
+*********
+Processo in exec: 
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 1
+
+Lista processi pronti: 
+Nome processo: init 
+Stato: pronto 
+Process Identifier: 1 
+Tempo di caricamento richiesto: 3 
+Tempo di caricamento ottenuto: 2
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 2
+
+*********
+Processo in exec: 
+Nome processo: init 
+Stato: pronto 
+Process Identifier: 1 
+Tempo di caricamento richiesto: 3 
+Tempo di caricamento ottenuto: 2
+
+Lista processi pronti: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 2
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 2
+
+*********
+Processo in exec: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 2
+
+Lista processi pronti: 
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 2
+
+*********
+Processo in exec: 
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 2
+
+Lista processi pronti: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 3
+
+*********
+Processo in exec: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 3
+
+Lista processi pronti: 
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 3
+
+*********
+Processo in exec: 
+Nome processo: dbus 
+Stato: pronto 
+Process Identifier: 3 
+Tempo di caricamento richiesto: 4 
+Tempo di caricamento ottenuto: 3
+
+Lista processi pronti: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 4
+
+*********
+Processo in exec: 
+Nome processo: netScope 
+Stato: pronto 
+Process Identifier: 2 
+Tempo di caricamento richiesto: 5 
+Tempo di caricamento ottenuto: 4
+
