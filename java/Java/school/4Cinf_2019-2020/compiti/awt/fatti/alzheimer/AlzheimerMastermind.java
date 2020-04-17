@@ -30,7 +30,7 @@ public class AlzheimerMastermind {
                 count -= 2;             //decrement cound
                 if (count == 0) {       //if all cards are gone then win
                     System.out.println("YOU WON!!");
-                    System.exit(0);     //I'm sorry(n't) but I am not going to sent an exception through 4 different classes just for this.
+                    new ExitPopup();     //I'm sorry(n't) but I am not going to sent an exception through 4 different classes just for this.
                 }
             }
             else { //if cards dont match
