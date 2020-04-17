@@ -133,7 +133,6 @@ public class GUI {
                 }
             });
             lPanel.add(mcBtn);
-        
 
             //aggiunge lPanel alla finestra principale
             mainWin.getContentPane().add(lPanel);
@@ -145,10 +144,8 @@ public class GUI {
             mainWin.setVisible(true);
 
         } catch (NullPointerException e) {
-
             System.out.println(e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
-
             System.out.println("USAGE: java Test <nomeFile>");
         }
     }
