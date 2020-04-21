@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/*
+    - root: TreeNode
+*/
 public class Albero {
     private TreeNode root;
     
@@ -35,29 +38,53 @@ public class Albero {
         }
         return out;
     }
-/* 
+
     public String visitaAnticipata() {
         String out = "";
-
-    }
-
-    public String visitaPosticipata() {
-
-    }
-
-    public String visitaSimmetrica() {
-
+        out += visitaAnticipata(root);
+        return out;
     }
 
     private String visitaAnticipata(TreeNode node) {
+        String out = "";
+        if (node != null) {
+            out += " " + node.toString() + " ";
+            out += visitaAnticipata(node.getLeft());
+            out += visitaAnticipata(node.getRight());
+        }
+        return out;
+    }
 
+    public String visitaPosticipata() {
+        String out = "";
+        out += visitaPosticipata(root);
+        return out;
     }
 
     private String visitaPosticipata(TreeNode node) {
+        String out = "";
+        if (node != null) {
+            out += visitaPosticipata(node.getLeft());
+            out += visitaPosticipata(node.getRight());
+            out += " " + node.toString() + " ";
+        }
+        return out;
+    }
 
+    public String visitaSimmetrica() {
+        String out = "";
+        out += visitaSimmetrica(root);
+        return out;
     }
 
     private String visitaSimmetrica(TreeNode node) {
+        String out = "";
+        if (node != null) {
+            out += visitaSimmetrica(node.getLeft());
+            out += " " + node.toString() + " ";
+            out += visitaSimmetrica(node.getRight());
+        }
+        return out;
+    }
 
-    } */
 }
