@@ -5,6 +5,9 @@ default:	*.java
 	echo "Main-Class: GUI" >> out/manifest.mf
 	cd out; jar cmf manifest.mf ../a.jar .
 
+compress:
+	tar cvf memorino.tar *.java Makefile resources
+
 
 clean:
 	rm -rf out

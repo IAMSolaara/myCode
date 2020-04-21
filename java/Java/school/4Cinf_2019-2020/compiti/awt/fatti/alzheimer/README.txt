@@ -3,3 +3,6 @@ I sorgenti sono tutti in un'archivio perche' senno' sarebbe piuttosto casinoso p
 Per ora non ci sono commenti, se non pochi giusto perche' sono i piu' importanti.
 Se proprio proprio servono tutti saranno nella prossima release
 Questo e' il file da leggere. Gli altri sono li perche' anche se li cancello drive mi dice che sono ancora disponibili ai collaboratori .-.
+Changelog:
+	Aggiunta possibilita' di reiniziare il gioco.
+	Spostate funzioni di init e generazione dentro il AlzheimerMastermind
