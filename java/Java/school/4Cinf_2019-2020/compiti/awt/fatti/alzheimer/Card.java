@@ -41,4 +41,6 @@ public class Card extends JButton{
         ((JPanel) getParent()).revalidate();
         ((JPanel) getParent()).repaint();
     }
+
+    public int getID() {return id;}
 }

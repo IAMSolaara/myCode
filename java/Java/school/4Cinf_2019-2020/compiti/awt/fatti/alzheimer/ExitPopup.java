@@ -8,24 +8,32 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 public class ExitPopup {
-    public ExitPopup() {
+    public ExitPopup(AlzheimerMastermind am) {
         JFrame popup = new JFrame("popup test");
         popup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        popup.setSize(160, 50);
+        popup.setSize(180, 90);
         JPanel top = new JPanel();
-        top.setSize(160, 20);
+        top.setSize(popup.getWidth(), 20);
         top.setLocation(0,0);
-        top.add(new JLabel("You won!"));
+        top.add(new JLabel("You won! Wanna retry?"));
         JPanel bottom = new JPanel();
-        bottom.setSize(160, 30);
+        bottom.setSize(popup.getWidth(), popup.getHeight() - top.getHeight());
         bottom.setLocation(0,20);
-        JButton exitButton = new JButton("OK");
+        JButton restartButton = new JButton("Yes");
+        restartButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                am.restart();
+                popup.dispose();
+            }
+        });
+        JButton  exitButton = new JButton("No");
         exitButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
         bottom.add(exitButton);
+        bottom.add(restartButton);
         popup.getContentPane().setLayout(null);
         popup.getContentPane().add(top);
         popup.getContentPane().add(bottom);
