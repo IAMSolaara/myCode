@@ -87,4 +87,23 @@ public class Albero {
         return out;
     }
 
+    public int contaFoglie() {
+        int out = 0;
+        out = contaFoglie(root);
+        return out;
+    }
+
+    private int contaFoglie(TreeNode node) {
+		int out = 0;
+		if (node != null) {
+			if (node.getLeft() == null && node.getRight() == null) out = 1;
+			else {
+				out += contaFoglie(node.getLeft());
+				out += contaFoglie(node.getRight());
+			}
+		}
+        return out;
+    }
+
+
 }

@@ -10,6 +10,7 @@ public class Test {
             System.out.println("Anticipata: "+a.visitaAnticipata());
             System.out.println("Simmetrica: "+a.visitaSimmetrica());
             System.out.println("Posticipata: "+a.visitaPosticipata());
+            System.out.println("Foglie: "+a.contaFoglie());
         }
         catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
