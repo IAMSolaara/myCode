@@ -105,5 +105,41 @@ public class Albero {
         return out;
     }
 
+    public int contaNodi() {
+        return contaNodi(root);
+    }
+
+    private int contaNodi(TreeNode node) {
+        int out = 0;
+        if (node != null) {
+            out++;
+            out += contaNodi(node.getLeft());
+            out += contaNodi(node.getRight());
+        }
+        return out;
+    }
+
+    public TreeNode ricerca(int query) {
+        return ricerca(root, query);
+    }
+
+    private TreeNode ricerca(TreeNode node, int query) {
+        TreeNode out = null;
+        if (node != null) {
+            if (node.getVal() == query) {
+                out = node;
+            }
+            else {
+                TreeNode leftRes = ricerca(node.getLeft(), query);
+                if (leftRes == null) {
+                    TreeNode rightRes = ricerca(node.getRight(), query);
+                    if (rightRes != null) {
+                        out = rightRes;
+                    }
+                } else out = leftRes;
+            }
+        }
+        return out;
+    }
 
 }
