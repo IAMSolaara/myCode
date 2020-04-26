@@ -12,6 +12,7 @@ import java.util.Scanner;
     + Albero()
 
     + caricaAlbero(in f: File): void
+    + caricaAlbero(in s: String): void
     - caricaAlbero(in sc: Scanner): TreeNode
 
     + toString(): String
@@ -26,7 +27,6 @@ import java.util.Scanner;
     + ricerca(in query: String): TreeNode
     - ricerca(in node: TreeNode, query: String): TreeNode
 
-    + getRoot(): TreeNode
     + merge(Albero gen2, String newRoot): void
 */
 
@@ -45,10 +45,26 @@ public class Albero {
     public void caricaAlbero(File f) throws FileNotFoundException{
         try {
             Scanner sc = new Scanner(f);
-            caricaAlbero(sc);
+            root = caricaAlbero(sc);
         }
         catch (FileNotFoundException e) {
             throw new FileNotFoundException("File non trovato.");
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+            throw new NullPointerException("Errore lettura file.");
+        }
+    }
+
+    /**
+     * Metodo pubblico per caricare l'albero
+     * @param s Oggetto string sorgente
+     * @throws FileNotFoundException
+     */
+    public void caricaAlbero(String s) throws FileNotFoundException{
+        try {
+            Scanner sc = new Scanner(s);
+            root = caricaAlbero(sc);
         }
         catch (NullPointerException e) {
             throw new NullPointerException("Errore lettura file.");
@@ -60,17 +76,18 @@ public class Albero {
      * @param sc Oggetto scanner dal quale prendere gli elementi
      * @return TreeNode caricato
      */
-    private void caricaAlbero(Scanner sc) {
+    private TreeNode caricaAlbero(Scanner sc) {
+        TreeNode out = null;
         String firstField, secondField, thirdField;
         while (sc.hasNext()) {
             firstField = sc.next();
             secondField = sc.next();
             thirdField = sc.next();
             if (firstField.equals(".")) {
-                root = new TreeNode(new String(secondField));
+                out = new TreeNode(new String(secondField));
             }
             else {
-                TreeNode father = ricerca(root, firstField);
+                TreeNode father = ricerca(out, firstField);
                 String childName = secondField;
                 String childPos = thirdField;
                 if (childPos.equals("s")) {
@@ -81,6 +98,40 @@ public class Albero {
                 }
             }
         }
+        return out;
+    }
+
+    /**
+     * Metodo pubblico per la visita anticipata. Stampa l'albero
+     * @return Stringa contenente lo stato dell'oggetto
+     */
+    public String export() {
+        String out = " . " + root.getVal() + " . \n";
+        out += root.getVal() + " " + root.getLeft().getVal() + " " + "s\n";
+        out += root.getVal() + " " + root.getRight().getVal() + " " + "d\n";
+        out += export(root.getLeft());
+        out += export(root.getRight());
+        return out;
+    }
+
+    /**
+     * Controparte privata export
+     * @param node Nodo da stampare
+     * @return Stringa contenente lo stato del sottoalbero con node come radice
+     */
+    private String export(TreeNode node) {
+        String out = "";
+        if (node != null) {
+            if (node.getLeft() != null) {
+                out += node.toString() + " " + node.getLeft().toString() + " " + "s\n";
+                out += export(node.getLeft());
+            }
+            if (node.getRight() != null) {
+                out += node.toString() + " " + node.getRight().toString() + " " + "d\n";
+                out += export(node.getRight());
+            }
+        }
+        return out;
     }
 
     /**
@@ -193,14 +244,6 @@ public class Albero {
     }
 
     /**
-     * Getter radice
-     * @return Riferimento alla radice
-     */
-    public TreeNode getRoot() {
-        return root;
-    }
-
-    /**
      * Metodo che fonde due alberi con un nuovo nato
      * @param gen2 Albero secondo genitore
      * @param newRoot Nome del nuovo figlio
@@ -208,7 +251,7 @@ public class Albero {
     public void merge(Albero gen2, String newRoot) {
         TreeNode out = new TreeNode(newRoot);
         out.setLeft(root);
-        out.setRight(gen2.getRoot());
+        out.setRight(caricaAlbero(new Scanner(gen2.export())));
         root = out;
     }
 }

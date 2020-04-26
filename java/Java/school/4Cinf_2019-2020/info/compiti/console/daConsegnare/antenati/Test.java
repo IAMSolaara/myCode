@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
@@ -9,12 +10,13 @@ public class Test {
             Albero a = new Albero();
             Albero a2 = new Albero();
             a.caricaAlbero(f);
+            System.out.println("a: \n" + a.toString());
             a2.caricaAlbero(f2);
-            System.out.println("Albero: "+a);
-            System.out.println("Albero: "+a2);
-            a.merge(a2, "Gesu'");
-            System.out.println("Albero: "+a);
-            //System.out.println(a.ricerca("Mario"));
+            System.out.println("a2: \n" + a2.toString());
+            a.merge(a2, "Mimmo");
+            System.out.println("a: \n"+a.export());
+            System.out.println(a.ricerca("Maria"));
+            System.out.println(a.ricerca("Mario"));
         }
         catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
