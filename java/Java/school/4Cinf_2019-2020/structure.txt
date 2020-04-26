@@ -1,0 +1,51 @@
+.
+(0tqq (Binfo
+(0x   tqq (Bcompiti
+(0x   x   tqq (Bawt
+(0x   x   x   mqq (Bfatti
+(0x   x   mqq (Bconsole
+(0x   x       tqq (BdaConsegnare
+(0x   x       mqq (Bfatti
+(0x   tqq (Blaboratorio
+(0x   x   tqq (Bawt
+(0x   x   x   tqq (BappGraphicaN1
+(0x   x   x   tqq (BcomeToBrazil
+(0x   x   x   tqq (BdisegnaLaLinea
+(0x   x   x   tqq (BgiochinoBurdo
+(0x   x   x   mqq (Bspezzata
+(0x   x   mqq (Bconsole
+(0x   x       tqq (BdaConsegnare
+(0x   x       mqq (Bfatti
+(0x   mqq (Blezioni
+(0x       tqq (Bawt
+(0x       x   tqq (BdaConsegnare
+(0x       x   mqq (Bfatti
+(0x       tqq (Bconsole
+(0x       x   tqq (BdaConsegnare
+(0x       x   mqq (Bfatti
+(0x       mqq (Bfile
+(0x           mqq (BdaConsegnare
+(0mqq (Btps
+(0    tqq (Bcompiti
+(0    x   tqq (Bawt
+(0    x   x   tqq (BdaConsegnare
+(0    x   x   mqq (Bfatti
+(0    x   mqq (Bconsole
+(0    x       tqq (BdaConsegnare
+(0    x       mqq (Bfatti
+(0    tqq (Blaboratorio
+(0    x   tqq (Bawt
+(0    x   x   tqq (BdaConsegnare
+(0    x   x   mqq (Bfatti
+(0    x   mqq (Bconsole
+(0    x       tqq (BdaConsegnare
+(0    x       mqq (Bfatti
+(0    mqq (Blezioni
+(0        tqq (Bawt
+(0        x   tqq (BdaConsegnare
+(0        x   mqq (Bfatti
+(0        mqq (Bconsole
+(0            tqq (BdaConsegnare
+(0            mqq (Bfatti
+
+48 directories
