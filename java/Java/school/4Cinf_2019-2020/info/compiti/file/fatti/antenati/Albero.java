@@ -153,9 +153,12 @@ public class Albero {
     private String toString(TreeNode node) {
         String out = "";
         if (node != null) {
-            out += " " + node.toString() + " ";
+            out += " " + node.toString() + "\n";
+            if (node.getLeft() != null) out += "\tMadre: " + node.getLeft().toString();
+            if (node.getRight() != null) out += "\tPadre: " + node.getRight().toString() + "\n";
             out += toString(node.getLeft());
             out += toString(node.getRight());
+            out +="\n";
         }
         return out;
     }
@@ -215,8 +218,18 @@ public class Albero {
      * @param query Stringa da cercare nell'albero
      * @return Nodo trovato
      */
-    private TreeNode ricerca(String query) {
-        return ricerca(root, query);
+    public String[] ricercaGenitori(String query) {
+        TreeNode found = null;
+        String[] res = null;
+        if (query != null) {
+            found = ricerca(root, query);
+            if (found != null) {
+                res = new String[2];
+                res[0] = found.getLeft().getVal();
+                res[1] = found.getRight().getVal();
+            }
+        }
+        return res;
     }
 
     /**
@@ -254,5 +267,26 @@ public class Albero {
         out.setLeft(root);
         out.setRight(caricaAlbero(new Scanner(gen2.export())));
         root = out;
+    }
+
+    public boolean aggiungiGenitore(String query, String parentName, boolean dir) {
+        boolean out = true;
+        TreeNode found = null;
+        if (query != null && parentName != null) {
+            found = ricerca(root, query);
+            if (dir) { // uomo
+                if (found.getRight() != null) {
+                    found.setRight(new TreeNode(parentName));
+                } else
+                    out = false;
+            } else { // donna
+                if (found.getLeft() != null) {
+                    found.setLeft(new TreeNode(parentName));
+                } else
+                    out = false;
+            }
+        } else
+            out = false;
+        return out;
     }
 }
