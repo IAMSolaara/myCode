@@ -107,10 +107,11 @@ public class Albero {
      */
     public String export() {
         String out = " . " + root.getVal() + " . \n";
-        out += root.getVal() + " " + root.getLeft().getVal() + " " + "s\n";
+/*         out += root.getVal() + " " + root.getLeft().getVal() + " " + "s\n";
         out += root.getVal() + " " + root.getRight().getVal() + " " + "d\n";
         out += export(root.getLeft());
-        out += export(root.getRight());
+        out += export(root.getRight()); */
+        out += export(root);
         return out;
     }
 
@@ -214,7 +215,7 @@ public class Albero {
      * @param query Stringa da cercare nell'albero
      * @return Nodo trovato
      */
-    public TreeNode ricerca(String query) {
+    private TreeNode ricerca(String query) {
         return ricerca(root, query);
     }
 
