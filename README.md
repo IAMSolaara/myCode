@@ -10,7 +10,7 @@ Every directory in the root is dedicated to a set of languages, like C-derived l
 
 You will not probably find binaries (exception made for x86 ASM, that really only works under x86 MS-DOS like dosbox or actual pure DOS so change of architectures is not an issue)
 
-You were probably brought here from my website. Know that this is the first place that gets updated so if you want to stay on the "bleeding edge" this is the place to go as I remember to update the site's clone only 3-4 times a week.
+You were probably brought here from my website. Know that this is the first place that gets updated so if you want to stay on the "bleeding edge" this is the place to go as the site syncs something like every 30-ish minutes (and sometimes it broke lol).
 
 In Templates you can find various templates for stuff like Makefiles (I use them myself so I can generalize things here as much as possible).
 
@@ -30,7 +30,6 @@ You can of course help me get better at this by either opening an issue or just 
 
 Had you not realized earlier, I have my own website, [https://mentalabs.eu](https://mentalabs.eu) (yes, it has SSL encryption courtesy of Let's Encrypt, no promo here), where you can find more things I do like my Doom servers, should you want to play a game there, or maybe check out my bullettin board, where I put some thoughts now and then. 
 
-Do note that sometimes it may be down for different issues like power outages (not that frequent) or just random errors that can occur for random reasons.
 
 Greetings and have a good day.
 
