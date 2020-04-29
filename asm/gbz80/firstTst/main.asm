@@ -1,0 +1,6 @@
+GAME_NAME EQUS "MLGBTest"
+SGB_SUPPORT EQU 0
+;GBC_SUPPORT EQU 0
+ROM_SIZE EQU 0
+RAM_SIZE EQU 0
+include "libs/gingerbread.asm"
