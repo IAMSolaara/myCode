@@ -1,7 +1,7 @@
 a.out
-/Java/Java/**/out/
+/java/Java/**/out/
 *.swp
-/CXX/Arduino/libraries/*
+/cxx/Arduino/libraries
 /asm/**/*.o
 /README.site
 /java/Java/stuff/NetBeansProject/SchoolScheduleClient/target/
