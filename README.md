@@ -28,7 +28,7 @@ You can of course help me get better at this by either opening an issue or just 
 
 ---
 
-Had you not realized earlier, I have my own website, which I self-host on a Raspberry Pi 3B at the URL [https://162portal.dnsitalia.org](https://162portal.dnsitalia.org) (yes, it has SSL encryption courtesy of Let's Encrypt, no promo here), where you can find more things I do like my Doom servers, should you want to play a game there, or maybe check out my bullettin board, where I put some thoughts now and then. 
+Had you not realized earlier, I have my own website, [https://mentalabs.eu](https://mentalabs.eu) (yes, it has SSL encryption courtesy of Let's Encrypt, no promo here), where you can find more things I do like my Doom servers, should you want to play a game there, or maybe check out my bullettin board, where I put some thoughts now and then. 
 
 Do note that sometimes it may be down for different issues like power outages (not that frequent) or just random errors that can occur for random reasons.
 
