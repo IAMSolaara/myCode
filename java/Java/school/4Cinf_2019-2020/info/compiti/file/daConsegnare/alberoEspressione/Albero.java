@@ -4,6 +4,33 @@ import java.util.Scanner;
 
 /*
     - root: TreeNode
+
+    + Albero()
+    + caricaAlbero(in f: File): void
+    - caricaAlbero(in sc: Scanner): void
+
+    + visitaAnticipata(): String
+    - visitaAnticipata(in node: TreeNode): String
+    + eval(): double
+    - eval(in node: TreeNode): String
+
+    + toString(): String
+    - toString(in node: TreeNode): String
+
+    + visitaPosticipata(): String
+    - visitaPosticipata(in node: TreeNode): String
+
+    + contaFoglie(): int
+    - contaFoglie(): int
+
+    + contaFoglie(in node: TreeNode): int
+    - contaFoglie(in node: TreeNode): int
+
+    + ricerca(in query: String): TreeNode
+    - ricerca(in node: TreeNode; query: String): TreeNode
+
+    + isOperator(in query: String): boolean
+    + isOperand(in query: String): boolean
 */
 public class Albero {
     private TreeNode root;
@@ -43,6 +70,45 @@ public class Albero {
         return out;
     }
 
+    public String visitaAnticipata() {
+        String out = "";
+        out += visitaAnticipata(root);
+        return out;
+    }
+
+    private String visitaAnticipata(TreeNode node) {
+        String out = "";
+        if (node != null) {
+            out += " " + node.toString() + " ";
+            out += visitaAnticipata(node.getLeft());
+            out += visitaAnticipata(node.getRight());
+        }
+        return out;
+    }
+    
+    public double eval() {
+        
+        return Double.parseDouble(eval(root));
+    }
+
+    private String eval(TreeNode node) {
+        String out = "";
+        if (node != null) {
+            //controllo se il nodo e' operatore
+            if (isOperator(node.getVal())) {
+                switch (node.getVal()) { //controllo operatore
+                    case "+":
+                        out += Double.parseDouble(eval(node.getLeft())) + Double.parseDouble(eval(node.getRight()));
+                        break;
+                    case "*":
+                        out += Double.parseDouble(eval(node.getLeft())) * Double.parseDouble(eval(node.getRight()));
+                        break;
+                }
+            } else out += node.toString();
+        }
+        return out;
+    }
+
     public String toString() {
         String out = "";
         out += toString(root);
@@ -52,25 +118,9 @@ public class Albero {
     private String toString(TreeNode node) {
         String out = "";
         if (node != null) {
-            out += " " + node.toString() + " ";
-            out += toString(node.getLeft());
-            out += toString(node.getRight());
-        }
-        return out;
-    }
-
-    public String visitaSimmetrica() {
-        String out = "";
-        out += visitaSimmetrica(root);
-        return out;
-    }
-
-    private String visitaSimmetrica(TreeNode node) {
-        String out = "";
-        if (node != null) {
             //controllo se il nodo e' operatore
             if (isOperator(node.getVal())) {
-                out += String.format("(%s%s%s)", visitaSimmetrica(node.getLeft()), node.toString(), visitaSimmetrica(node.getRight()) );
+                out += String.format("(%s%s%s)", toString(node.getLeft()), node.toString(), toString(node.getRight()) );
             } else out += node.toString();
         }
         return out;
@@ -147,41 +197,16 @@ public class Albero {
         return out;
     }
 
-    private boolean isOperator(String in) {
-        return (in.equals("+") || in.equals("*") ? true : false);
+    private boolean isOperator(String query) {
+        return (query.equals("+") || query.equals("*") ? true : false);
     }
 
-    private boolean isOperand(String in) {
+    private boolean isOperand(String query) {
         try {
-            Double.parseDouble(in);
+            Double.parseDouble(query);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-    
-
-    public String eval() {
-        String out = "";
-        out += eval(root);
-        return out;
-    }
-
-    private String eval(TreeNode node) {
-        String out = "";
-        if (node != null) {
-            //controllo se il nodo e' operatore
-            if (isOperator(node.getVal())) {
-                switch (node.getVal()) { //controllo operatore
-                    case "+":
-                        out += Double.parseDouble(eval(node.getLeft())) + Double.parseDouble(eval(node.getRight()));
-                        break;
-                    case "*":
-                        out += Double.parseDouble(eval(node.getLeft())) * Double.parseDouble(eval(node.getRight()));
-                        break;
-                }
-            } else out += node.toString();
-        }
-        return out;
     }
 }
