@@ -52,13 +52,26 @@ public class Albero {
     private String toString(TreeNode node) {
         String out = "";
         if (node != null) {
+            out += " " + node.toString() + " ";
+            out += toString(node.getLeft());
+            out += toString(node.getRight());
+        }
+        return out;
+    }
+
+    public String visitaSimmetrica() {
+        String out = "";
+        out += visitaSimmetrica(root);
+        return out;
+    }
+
+    private String visitaSimmetrica(TreeNode node) {
+        String out = "";
+        if (node != null) {
             //controllo se il nodo e' operatore
             if (isOperator(node.getVal())) {
-                out += String.format(" ( %s%s%s ) ", toString(node.getLeft()), node.toString(), toString(node.getRight()) );
+                out += String.format("(%s%s%s)", visitaSimmetrica(node.getLeft()), node.toString(), visitaSimmetrica(node.getRight()) );
             } else out += node.toString();
-            //out += " " + node.toString() + " ";
-            //out += toString(node.getLeft());
-            //out += toString(node.getRight());
         }
         return out;
     }
@@ -75,22 +88,6 @@ public class Albero {
             out += visitaPosticipata(node.getLeft());
             out += visitaPosticipata(node.getRight());
             out += " " + node.toString() + " ";
-        }
-        return out;
-    }
-
-    public String visitaSimmetrica() {
-        String out = "";
-        out += visitaSimmetrica(root);
-        return out;
-    }
-
-    private String visitaSimmetrica(TreeNode node) {
-        String out = "";
-        if (node != null) {
-            out += visitaSimmetrica(node.getLeft());
-            out += " " + node.toString() + " ";
-            out += visitaSimmetrica(node.getRight());
         }
         return out;
     }
