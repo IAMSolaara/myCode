@@ -9,13 +9,11 @@ import java.util.Scanner;
     + caricaAlbero(in f: File): void
     - caricaAlbero(in sc: Scanner): void
 
-    + visitaAnticipata(): String
-    - visitaAnticipata(in node: TreeNode): String
-    + eval(): double
-    - eval(in node: TreeNode): String
-
     + toString(): String
     - toString(in node: TreeNode): String
+
+    + visitaAnticipata(): String
+    - visitaAnticipata(in node: TreeNode): String
 
     + visitaPosticipata(): String
     - visitaPosticipata(in node: TreeNode): String
@@ -26,11 +24,8 @@ import java.util.Scanner;
     + contaFoglie(in node: TreeNode): int
     - contaFoglie(in node: TreeNode): int
 
-    + ricerca(in query: String): TreeNode
-    - ricerca(in node: TreeNode; query: String): TreeNode
-
-    + isOperator(in query: String): boolean
-    + isOperand(in query: String): boolean
+    + classifica(in vote: int): String
+    - classifica(in node: TreeNode, vote: int): String
 */
 public class Albero {
     private TreeNode root;
@@ -57,12 +52,11 @@ public class Albero {
         String next;
         if (sc.hasNext()) {
             next = sc.next();
-            if (next.equals("+") || next.equals("*")) {
-                out = new TreeNode(next);
+            out = new TreeNode(next);
+            if (out.isVote()) {
                 out.setLeft(caricaAlbero(sc));
                 out.setRight(caricaAlbero(sc));
-            } else if (isOperand(next)) {
-                out = new TreeNode(next);
+            } else {
                 out.setLeft(null);
                 out.setRight(null);
             }
@@ -86,29 +80,6 @@ public class Albero {
         return out;
     }
     
-    public double eval() {
-        
-        return Double.parseDouble(eval(root));
-    }
-
-    private String eval(TreeNode node) {
-        String out = "";
-        if (node != null) {
-            //controllo se il nodo e' operatore
-            if (isOperator(node.getVal())) {
-                switch (node.getVal()) { //controllo operatore
-                    case "+":
-                        out += Double.parseDouble(eval(node.getLeft())) + Double.parseDouble(eval(node.getRight()));
-                        break;
-                    case "*":
-                        out += Double.parseDouble(eval(node.getLeft())) * Double.parseDouble(eval(node.getRight()));
-                        break;
-                }
-            } else out += node.toString();
-        }
-        return out;
-    }
-
     public String toString() {
         String out = "";
         out += toString(root);
@@ -118,10 +89,9 @@ public class Albero {
     private String toString(TreeNode node) {
         String out = "";
         if (node != null) {
-            //controllo se il nodo e' operatore
-            if (isOperator(node.getVal())) {
-                out += String.format("(%s%s%s)", toString(node.getLeft()), node.toString(), toString(node.getRight()) );
-            } else out += node.toString();
+            out += toString(node.getLeft());
+            out += " " + node.toString() + " ";
+            out += toString(node.getRight());
         }
         return out;
     }
@@ -174,39 +144,20 @@ public class Albero {
         return out;
     }
 
-    public TreeNode ricerca(String query) {
-        return ricerca(root, query);
+    public String classifica(int vote) {
+        return classifica(root, vote);
     }
 
-    private TreeNode ricerca(TreeNode node, String query) {
-        TreeNode out = null;
-        if (node != null) {
-            if (node.getVal().equals(query)) {
-                out = node;
-            }
-            else {
-                TreeNode leftRes = ricerca(node.getLeft(), query);
-                if (leftRes == null) {
-                    TreeNode rightRes = ricerca(node.getRight(), query);
-                    if (rightRes != null) {
-                        out = rightRes;
-                    }
-                } else out = leftRes;
-            }
-        }
+    private String classifica(TreeNode node, int vote) {
+        String out = "";
+        if (node != null && ( vote > 0 && vote <= 10)) { //controllo parametri
+            if (node.isVote()) {                         //controllo se e' voto
+                if (vote < node.getVote()) {             //controllo se il voto passato e' minore di quello del nodo
+                    out += node.getLeft().toString();    //escono le informazioni
+                } else
+                    out += classifica(node.getRight(), vote);  //altrimenti si passa al prossimo grado
+            } else out += node.toString();              //altrimenti e' un giudizio e si ritorna toString del nodo
+        } else out += "voto non valido.";
         return out;
-    }
-
-    private boolean isOperator(String query) {
-        return (query.equals("+") || query.equals("*") ? true : false);
-    }
-
-    private boolean isOperand(String query) {
-        try {
-            Double.parseDouble(query);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }

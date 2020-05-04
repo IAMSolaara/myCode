@@ -6,9 +6,11 @@
 /* Progetto della classe TreeNode
  *
  * Attributi:
- * - val: String
+ * - val: int
+ * - giudizio: String
  * - left: TreeNode
  * - right: TreeNode
+ * - isVote: boolean
  *
  * Metodi:
  * Costruttori:
@@ -16,23 +18,27 @@
  * 
  * Accessori:
  * + getVal(): String
+ * + getOp(): String
  * + getLeft(): TreeNode 
  * + getRight(): TreeNode
  *
  * Modificatori:
  * + setLeft(in tn: TreeNode): void
  * + setRight(in tn: TreeNode): void
- * + setVal(in val: String): void
  *
  * Altri metodi:
  * + toString(): String
+ * + isVote(): boolean
+ * - isNumber(): boolean
  */
 
 public class TreeNode {
 
 	//Attributi
-	private String val;
+	private String giudizio;
+	private int val;
 	private TreeNode left, right;
+	private boolean isVote;
 
 	//Costruttori
 	/**
@@ -40,7 +46,17 @@ public class TreeNode {
 	 */
 	public TreeNode(String val) {
 
-		this.val = val;
+		if (val != null) {
+			if (isNumber(val)) { // numero
+				this.val = Integer.parseInt(val);
+				this.giudizio = null;
+				isVote = true;
+			} else {
+				this.giudizio = val;
+				this.val = 0;
+				isVote = false;
+			}
+		}
 		left = null;
 		right = null;
 	}
@@ -50,9 +66,12 @@ public class TreeNode {
 	 * Restituisce il valore del TreeNode
 	 * @return Valore del nodo
 	 */
-	public String getVal() {
-		
+	public int getVote() {
 		return val;
+	}
+
+	public String getGiudizio() {
+		return giudizio;
 	}
 
 	/**
@@ -91,22 +110,28 @@ public class TreeNode {
 		right = tn;
 	}
 
-
-	/**
-	 * Imposta il valore
-	 * @param tn Valore nuovo
-	 */
-	public void setVal(String val) {
-
-		this.val = val;
-	}
-
 	//Altri metodi
 	/**
 	 * Restituisce una stringa con lo stato dell'oggetto
 	 * @return Stringa con lo stato dell'oggetto
 	 */
 	public String toString() {
-		return val;
+		String out = "";
+		if (isVote)
+			out+=val;
+		else out += giudizio;
+		return out;
+	}
+	
+	public boolean isVote() {return isVote;}
+
+	private boolean isNumber(String n) {
+		try{
+			Integer.parseInt(n);
+			return true;
+		}
+		catch(NumberFormatException e){
+			return false;
+		}
 	}
 }
