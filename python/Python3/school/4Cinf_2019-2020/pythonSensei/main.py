@@ -1,10 +1,12 @@
 import sys as sistema
+import os
 
 from requests import *
 
 import requests
 
-"""array = []
+"""
+array = []
 x = 'roberto'
 if (x == 'cauli' or x =='ciao'):
     print('giusto')
@@ -63,6 +65,7 @@ if ('test' in array):
 
 print(array)
 
+"""
 class testamento():
     def __init__(self, x=2):
         self.__x = x
@@ -74,6 +77,18 @@ class testamento():
         return self.__x
     def __mangle(self):
         self.__x = 135174634909859870928740589
+    def tupleTest(self):
+        return (self.__x)
+    def __str__(self):
+        return str(self.__x)
+
+class testamentoDiMorte(testamento):
+    def __init__(self):
+        super().__init__('brutte cose')
+    
+    def test(self):
+        return super().getX()
+    
 
 testino = testamento('ciao')
 print(testino.getX())
@@ -81,4 +96,33 @@ print(testino.getX())
 testino.muoro()
 print(testino.getX())
 
+print('ciao {}'.format(15))
+print(f'ciao {testino.getX()}')
+print("%s e' %x volte burdo" % ("ricco", 7896590894095678))
+print('%.2f' % 3454345.13531)
+
+for (r,d,f) in os.walk('.'):
+    for x in f:
+        if ('a' in f):
+            print('a trovata in %s' % f)
 """
+tuple = (1,2,3,54)
+for x in tuple:
+    print(x)
+
+for x in 'testsets':
+    print(x)
+
+for x in 12:
+    print(x)
+for x in range(5):
+    print(x)
+
+"""
+
+tdm = testamentoDiMorte()
+print(tdm)
+
+#print(tdm.test())
+
+print (3 == 3)
