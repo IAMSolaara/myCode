@@ -9,4 +9,7 @@ black = 0, 0, 0
 
 screen = pygame.display.set_mode(size)
 
-amiball = pygame.image.load("ami.png")
+#amiball = pygame.image.load("ami.png")
+
+while True:
+    print('test')
