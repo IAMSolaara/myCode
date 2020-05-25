@@ -1,8 +1,8 @@
 import pygame
 
 class AnimatedObject():
-    def __init__(self, sheetPath, sprSize, pos, scaledSize):
-        self.sheet = pygame.image.load(sheetPath).convert()
+    def __init__(self, path, sprSize, pos, scaledSize):
+        self.sheet = pygame.image.load(path).convert()
         self.sheet.set_colorkey((255,0,255))
         self.sprSize = sprSize
         self.sprArea = pygame.Rect((0,0), self.sprSize)
@@ -20,9 +20,8 @@ class AnimatedObject():
 
         self.sprArea.x = round(self.counter) * self.sprSize[0]
         surf = pygame.Surface(self.sprSize).convert_alpha()
-        surf.fill((255,0,255, 0))
+        surf.fill( (0,0,0,0) )
         surf.blit(self.sheet, (0,0), self.sprArea)
-        surf.set_colorkey((255,0,255))
         return pygame.transform.scale(surf, self.sprScaledSize)
     
     def get_rect(self):
