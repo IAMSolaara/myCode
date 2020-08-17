@@ -1,2 +1,2 @@
 default:	*.cpp
-	g++ *.cpp
+	DISTCC_HOSTS="x66 localhost" distcc -lstdc++ *.cpp

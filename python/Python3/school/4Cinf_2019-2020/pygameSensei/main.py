@@ -32,6 +32,7 @@ rectPos = (100,100)
 
 angle = 0
 angleInc = 1
+rectangle = pygame.Rect( (0,0), (25,25) )
 
 while running:
 
@@ -42,6 +43,8 @@ while running:
             rectPos = event.pos
         elif event.type == MOUSEBUTTONDOWN:
             angleInc *= -1
+            if rectangle.collidepoint(event.pos):
+                print('mouse within rectangle')
         elif event.type == KEYDOWN:
             if event.key == K_UP:
                 fontSize += 1
@@ -55,7 +58,10 @@ while running:
 
     screen.blit(image2, (0,0))
 
-    pygame.draw.rect( screen, (255,0,0), (rectPos[0] - (10 / 2), rectPos[1] - (50 / 2), 10, 50) )
+    
+    pygame.draw.rect( screen, (255,0,0), rectangle )
+
+    rectangle.move_ip(1,1)
 
     text = myfont.render('Test', True, (255,0,255))
 

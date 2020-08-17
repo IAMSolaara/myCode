@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Serializziona {
+public class SerializzaPunti {
 	public static void main(String[] args) {
 		try {
 			FileOutputStream fos = new FileOutputStream(new File("punti.ser"));
